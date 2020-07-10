@@ -21,7 +21,7 @@ namespace Personnel.Model
             this.Job=Job;
         }
         /// <summary>
-        /// 
+        /// id
         /// </summary>
         public int Id { get; set; }
         /// <summary>
