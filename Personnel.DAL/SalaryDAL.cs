@@ -1,10 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using Personnel.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using personnel.DAL;
+using personnel.Model;
+using System.Data;
 
 namespace Personnel.DAL
 {
@@ -12,15 +14,11 @@ namespace Personnel.DAL
     //从工具类获取数据库连接对象
     SqlDbHelper db = new SqlDbHelper();
     //查看所有用户工资信息
-    public Salary GetAllSalary()
-        {
-
-        }
     //根据用户ID查询工资信息
     //根据用户姓名查询工资信息
 
     //增加一个用户 如果返回为1，说明插入成功
-    public int Addsalary(Salary salary )
+    public int Addsalary(Salary salary)
     {
         String sql = "insert into salary values(@id, @pre_sal,@rp,@rp_date,@handler,@cancel_date,@cancel_reason,@current_sal";
         //参数列表赋值 防止SQL注入
@@ -35,126 +33,88 @@ namespace Personnel.DAL
                 new MySqlParameter("@cancel_reason",MySqlDbType.VarChar),
                 new MySqlParameter("@current_sal",MySqlDbType.Int32),
         };
-        p[0].Value = salary;
-        p[1].Value = user.Folk;
-        p[2].Value = user.Birthday;
-        p[3].Value = user.Age;
-        p[4].Value = user.Phone;
-        p[5].Value = user.Work_Time;
-        p[6].Value = user.Job;
+        p[0].Value = salary.id;
+        p[1].Value = salary.pre_sal;
+        p[2].Value = salary.rp;
+        p[3].Value = salary.rp_date;
+        p[4].Value = salary.handler;
+        p[5].Value = salary.cancel_date;
+        p[6].Value = salary.cancel_reason;
+        p[7].Value = salary.current_sal;
 
-        return db.ExecuteNonQuery(sql, p);
+            return db.ExecuteNonQuery(sql, p);
     }
-    //删除一个用户,如果返回1,说明删除成功
-    public int DeletUser(int id)
-    {
-        String sql = "delete from user where id=@id";
-        MySqlParameter[] p = { new MySqlParameter("@id", MySqlDbType.Int32) };
-        return db.ExecuteNonQuery(sql, p);
-    }
-
-    //修改一个用户 如果返回1，说明修改成功
-    public int ModifyUser(User user)
+    public int ModifySalary(Salary salary)
     {
 
-        String sql = "update user set name=@name,folk=@folk,birthday=@birthday,age=@age,phone=@phone,work_time=@work_time,job=@job where id=@id";
+        String sql = "update Salary set pre_sal@pre_sal,rp=@rp,rp_data=@rp_data,handler=@handler,cancel_date=@cancel_date,cancel_reason=@cancel_reason,current_sal=@current_sal where id=@id";
         //参数列表赋值 防止SQL注入
         MySqlParameter[] p =
         {
-                new MySqlParameter("@name",MySqlDbType.VarChar),
-                new MySqlParameter("@folk", MySqlDbType.VarChar),
-                new MySqlParameter("@birthday", MySqlDbType.DateTime),
-                new MySqlParameter("@age", MySqlDbType.Int32),
-                new MySqlParameter("@phone", MySqlDbType.VarChar),
-                new MySqlParameter("@work_time", MySqlDbType.Int32),
-                new MySqlParameter("@job", MySqlDbType.VarChar),
-                new MySqlParameter("@id",MySqlDbType.Int32)
+                new MySqlParameter("@pre_sal", MySqlDbType.Int32),
+                new MySqlParameter("@rp",MySqlDbType.Int32),
+                new MySqlParameter("@rp_date",MySqlDbType.DateTime),
+                new MySqlParameter("@handler",MySqlDbType.Int32),
+                new MySqlParameter("@cancel_date",MySqlDbType.DateTime),
+                new MySqlParameter("@cancel_reason",MySqlDbType.VarChar),
+                new MySqlParameter("@current_sal",MySqlDbType.Int32),
         };
-        p[0].Value = user.Name;
-        p[1].Value = user.Folk;
-        p[2].Value = user.Birthday;
-        p[3].Value = user.Age;
-        p[4].Value = user.Phone;
-        p[5].Value = user.Work_Time;
-        p[6].Value = user.Job;
-        p[7].Value = user.Id;
-        return db.ExecuteNonQuery(sql, p);
+            p[0].Value = salary.pre_sal;
+            p[1].Value = salary.rp;
+            p[2].Value = salary.rp_date;
+            p[3].Value = salary.handler;
+            p[4].Value = salary.cancel_date;
+            p[5].Value = salary.cancel_reason;
+            p[6].Value = salary.current_sal;
+            return db.ExecuteNonQuery(sql, p);
     }
 
-    //查询所有用户 （返回数组）
-    public List<User> getAllUsers()
+    //查询所有工资 （返回数组）
+    public List<Salary> getAllSalary()
     {
-        String sql = "select * from user";
+        //Salary salary = new Salary();
+        String sql = "select * from Salary";
         //模拟数据库表 （相当于二维数组）
         DataTable dt = db.ExecuteDataTable(sql);
-        List<User> users = new List<User>();
+        List<Salary> salarys = new List<Salary>();
         //ORM  对象关系映射  把查询到的信息封装成对象
         foreach (DataRow dr in dt.Rows)
         {
-            User user = DataRowToUser(dr);
-            users.Add(user);
+            Salary salary = DataRowToSalary(dr);
+            salarys.Add(salary);
         }
-        return users;
+        return salarys;
     }
 
     //根据ID查找用户（搜索按钮）如果返回非空，说明查找成功
-    public User GetUserByID(int id)
+    public Salary GetUserByID(int id)
     {
-        String sql = "select * from user where id=@id";
+        String sql = "select * from Salary where id=@id";
         MySqlParameter[] p = { new MySqlParameter("@id", MySqlDbType.Int32) };
         p[0].Value = id;
         DataTable dt = db.ExecuteDataTable(sql, p);
-        User user = null;
+        Salary salary = null;
         if (dt.Rows.Count > 0)
         {
             DataRow dr = dt.Rows[0];
-            user = DataRowToUser(dr);
+            salary = DataRowToSalary(dr);
         }
-        return user;
-    }
-    //根据姓名查找用户（搜索按钮）
-    public User GetUserByName(int name)
-    {
-        String sql = "select * from user where name=@name";
-        MySqlParameter[] p = { new MySqlParameter("@name", MySqlDbType.VarChar) };
-        p[0].Value = name;
-        DataTable dt = db.ExecuteDataTable(sql, p);
-        User user = null;
-        if (dt.Rows.Count > 0)
-        {
-            DataRow dr = dt.Rows[0];
-            user = DataRowToUser(dr);
-        }
-        return user;
-    }
-    //统计用户数量
-    public int GetUserNum()
-    {
-        String sql = "select count(*) from user";
-        DataTable dt = db.ExecuteDataTable(sql);
-        DataRow dr = dt.Rows[0];
-        int num = 0;
-        num = Convert.ToInt32(dr["count(*)"]);
-        return num;
+        return salary;
     }
 
     //将行中数据对应到对象属性
-    private User DataRowToUser(DataRow dr)
+    private Salary DataRowToSalary(DataRow dr)
     {
-        User user = new User();
+        Salary salary = new Salary();
         //数据库中数据格式和实体类中格式不同
-        user.Id = Convert.ToInt32(dr["id"]);
-        if (dr["birthday"] != DBNull.Value)//判断日期非空
-        {
-            user.Birthday = Convert.ToDateTime(dr["Birthday"]);
-        }
-        user.Name = Convert.ToString(dr["name"]);
-        user.Folk = Convert.ToString(dr["folk"]);
-        user.Job = Convert.ToString(dr["job"]);
-        user.Age = Convert.ToInt32(dr["age"]);
-        user.Phone = Convert.ToString(dr["phone"]);
-        user.Work_Time = Convert.ToInt32(dr["work_time"]);
-        return user;
+        salary.id = Convert.ToInt32(dr["id"]);
+        salary.pre_sal = Convert.ToInt32(dr["pre_sal"]);
+        salary.rp = Convert.ToInt32(dr["rp"]);
+        salary.rp_date = Convert.ToDateTime(dr["rp_date"]);
+        salary.handler = Convert.ToString(dr["handler"]);
+        salary.cancel_date = Convert.ToDateTime(dr["cancel_date"]);
+        salary.cancel_reason = Convert.ToString(dr["cancel_reason"]);
+        return salary;
     }
 
 }
