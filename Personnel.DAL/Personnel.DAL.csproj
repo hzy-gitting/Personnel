@@ -51,6 +51,7 @@
     <Compile Include="RPDAL.cs" />
     <Compile Include="SalaryDAL.cs" />
     <Compile Include="SQLHelper.cs" />
+    <Compile Include="UserDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Personnel.Model\Personnel.Model.csproj">

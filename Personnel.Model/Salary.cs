@@ -8,24 +8,28 @@ namespace personnel.Model
 {
 	public class Salary
 	{
-		public int id { get; set; }
-		public int p_sal { get; set; }
-		public int rp_id { get; set; }
-		public DateTime rp_date { get; set; }
-		public int handler { get; set; }
-		public DateTime cancel_date { get; set; }
-		public string cancel_reason { get; set; }
+		public int Id { get; set; }
+		public int Pre_sal { get; set; }
+		public int Rp_id { get; set; }
+		public DateTime Rp_date { get; set; }
+		public int Handler { get; set; }
+		public DateTime Cancel_date { get; set; }
+		public string Cancel_reason { get; set; }
+		public int Current_sal { get; set; }
 
-		public Salary(int id, int p_sal, int rp_id, DateTime rp_date,
-			int handler, DateTime cancel_date, string cancel_reason)
+		public Salary() { }
+
+		public Salary(int Id, int Pre_sal, int Rp_id, DateTime Rp_date,
+			int Handler, DateTime Cancel_date, string Cancel_reason,int Current_sal)
 		{
-			this.id = id;
-			this.rp_id = rp_id;
-			this.p_sal = p_sal;
-			this.rp_date = rp_date;
-			this.handler = handler;
-			this.cancel_date = cancel_date;
-			this.cancel_reason = cancel_reason;
+			this.Id = Id;
+			this.Pre_sal = Pre_sal;
+			this.Rp_id = Rp_id;
+			this.Rp_date = Rp_date;
+			this.Handler = Handler;
+			this.Cancel_date = Cancel_date;
+			this.Cancel_reason = Cancel_reason;
+			this.Current_sal = Current_sal;
 		}
 	}
 }

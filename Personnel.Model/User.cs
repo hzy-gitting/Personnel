@@ -8,7 +8,18 @@ namespace Personnel.Model
 {
     public class User
     {
+
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Folk { get; set; }
+        public DateTime Birthday { get; set; }
+        public int Age { get; set; }
+        public string Phone { get; set; }
+        public int Work_Time { get; set; }
+        public string Job { get; set; }
+       
         public User(){}
+
         public User(int Id, string Name, string Folk, DateTime Birthday, int Age,string Phone,int Work_Time,string Job)
         {
             this.Id = Id;
@@ -20,35 +31,6 @@ namespace Personnel.Model
             this.Work_Time=Work_Time;
             this.Job=Job;
         }
-        /// <summary>
-        /// id
-        /// </summary>
-        public int Id { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Folk { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime Birthday { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Age { get; set; }
-
-        public string Phone { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Work_Time { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Job { get; set; }
+       
     }
 }

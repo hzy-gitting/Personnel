@@ -8,19 +8,17 @@ namespace personnel.Model
 {
 	public class RP
 	{
-		public int rp_id { get; set; }
-		public string rp_name { get; set; }
-		public int sal { get; set; }
+		public int Rp_id { get; set; }
+		public string Rp_name { get; set; }
+		public int Sal { get; set; }
 
-		public RP()
-		{
+		public RP() { }
 
-		}
 		public RP(int rp_id, string rp_name, int sal)
 		{
-			this.rp_id = rp_id;
-			this.rp_name = rp_name;
-			this.sal = sal;
+			this.Rp_id = rp_id;
+			this.Rp_name = rp_name;
+			this.Sal = sal;
 		}
 	}
 }
