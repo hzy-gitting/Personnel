@@ -22,12 +22,12 @@ namespace Personnel.DAL
         MySqlParameter[] p =
         {
                 new MySqlParameter("@pre_sal",MySqlDbType.Int32),
-                new MySqlParameter("@rp_id", MySqlDbType.VarChar),
+                new MySqlParameter("@rp_id", MySqlDbType.Int32),
                 new MySqlParameter("@rp_date", MySqlDbType.DateTime),
-                new MySqlParameter("@handler", MySqlDbType.Int32),
-                new MySqlParameter("@cancel_date", MySqlDbType.VarChar),
-                new MySqlParameter("@cancel_reason", MySqlDbType.Int32),
-                new MySqlParameter("@current_sal", MySqlDbType.VarChar)
+                new MySqlParameter("@handler", MySqlDbType.VarChar),
+                new MySqlParameter("@cancel_date", MySqlDbType.DateTime),
+                new MySqlParameter("@cancel_reason", MySqlDbType.VarChar),
+                new MySqlParameter("@current_sal", MySqlDbType.Int32)
         };
         p[0].Value = salary.Pre_sal;
         p[1].Value = salary.Rp_id;
@@ -128,7 +128,7 @@ namespace Personnel.DAL
         salary.Pre_sal = Convert.ToInt32(dr["pre_sal"]);
         salary.Rp_id = Convert.ToInt32(dr["rp_id"]);
         salary.Rp_date = Convert.ToDateTime(dr["rp_date"]);
-        salary.Handler = Convert.ToInt32(dr["age"]);
+        salary.Handler = Convert.ToInt32(dr["handler"]);
         salary.Cancel_date = Convert.ToDateTime(dr["cancel_date"]);
         salary.Cancel_reason = Convert.ToString(dr["cancel_reason"]);
         salary.Current_sal = Convert.ToInt32(dr["current_sal"]);
