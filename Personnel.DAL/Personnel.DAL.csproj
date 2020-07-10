@@ -45,9 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuitDAL.cs" />
     <Compile Include="RPDAL.cs" />
+    <Compile Include="SalaryDAL.cs" />
     <Compile Include="SQLHelper.cs" />
   </ItemGroup>
   <ItemGroup>
