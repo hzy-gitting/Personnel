@@ -11,13 +11,15 @@ namespace personnel.BLL
 {
     public class LoginBLL
     {
-        LoginDAL loginDAL = new LoginDAL();
-        public bool Login(string username, string password, out Login login)
+        LoginDAL logindal = new LoginDAL();
+        
+        //返回值有三种情况 1.用户名不存在或密码错误返回-1  2.身份是员工返回0  3.身份是管理员返回1
+        public int Login(string username, string password,out Login loginer)
         {
-            //user = userDal.GetUserByLoginName(name, type);
-            login = loginDAL.GetLoginByuserameAndpassword(username, password);
-
-            return login != null;
+            //这里用两种判断方式 此处选择查询用户和密码，如果查询到了返回真
+            loginer = logindal.GetLoginByuserameAndpassword(username, password);
+            if (loginer == null) { return -1; }
+            return loginer.Flag;  //标志位复用
         }
     }
 }

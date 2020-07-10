@@ -59,10 +59,6 @@
       <Project>{fc8aad17-4157-4037-882c-0c94f304937a}</Project>
       <Name>Personnel.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Personnel\Personnel.csproj">
-      <Project>{fdd51c63-c035-4e6b-a21b-24003d0192e0}</Project>
-      <Name>Personnel</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
