@@ -33,14 +33,14 @@ namespace Personnel.DAL
                 new MySqlParameter("@cancel_reason",MySqlDbType.VarChar),
                 new MySqlParameter("@current_sal",MySqlDbType.Int32),
         };
-        p[0].Value = salary.id;
-        p[1].Value = salary.pre_sal;
-        p[2].Value = salary.rp;
-        p[3].Value = salary.rp_date;
-        p[4].Value = salary.handler;
-        p[5].Value = salary.cancel_date;
-        p[6].Value = salary.cancel_reason;
-        p[7].Value = salary.current_sal;
+        p[0].Value = salary.Id;
+        p[1].Value = salary.Pre_sal;
+        p[2].Value = salary.Rp_id;
+        p[3].Value = salary.Rp_date;
+        p[4].Value = salary.Handler;
+        p[5].Value = salary.Cancel_date;
+        p[6].Value = salary.Cancel_reason;
+        p[7].Value = salary.Current_sal;
 
             return db.ExecuteNonQuery(sql, p);
     }
@@ -59,13 +59,13 @@ namespace Personnel.DAL
                 new MySqlParameter("@cancel_reason",MySqlDbType.VarChar),
                 new MySqlParameter("@current_sal",MySqlDbType.Int32),
         };
-            p[0].Value = salary.pre_sal;
-            p[1].Value = salary.rp;
-            p[2].Value = salary.rp_date;
-            p[3].Value = salary.handler;
-            p[4].Value = salary.cancel_date;
-            p[5].Value = salary.cancel_reason;
-            p[6].Value = salary.current_sal;
+            p[0].Value = salary.Pre_sal;
+            p[1].Value = salary.Rp_id;
+            p[2].Value = salary.Rp_date;
+            p[3].Value = salary.Handler;
+            p[4].Value = salary.Cancel_date;
+            p[5].Value = salary.Cancel_reason;
+            p[6].Value = salary.Current_sal;
             return db.ExecuteNonQuery(sql, p);
     }
 
@@ -107,13 +107,13 @@ namespace Personnel.DAL
     {
         Salary salary = new Salary();
         //数据库中数据格式和实体类中格式不同
-        salary.id = Convert.ToInt32(dr["id"]);
-        salary.pre_sal = Convert.ToInt32(dr["pre_sal"]);
-        salary.rp = Convert.ToInt32(dr["rp"]);
-        salary.rp_date = Convert.ToDateTime(dr["rp_date"]);
-        salary.handler = Convert.ToString(dr["handler"]);
-        salary.cancel_date = Convert.ToDateTime(dr["cancel_date"]);
-        salary.cancel_reason = Convert.ToString(dr["cancel_reason"]);
+        salary.Id = Convert.ToInt32(dr["id"]);
+        salary.Pre_sal = Convert.ToInt32(dr["pre_sal"]);
+        salary.Rp_id = Convert.ToInt32(dr["rp"]);
+        salary.Rp_date = Convert.ToDateTime(dr["rp_date"]);
+        salary.Handler = Convert.ToInt32(dr["handler"]);
+        salary.Cancel_date = Convert.ToDateTime(dr["cancel_date"]);
+        salary.Cancel_reason = Convert.ToString(dr["cancel_reason"]);
         return salary;
     }
 
