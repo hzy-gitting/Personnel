@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
+using Personnel;
 
 namespace personnel.DAL
 {
@@ -93,6 +94,7 @@ namespace personnel.DAL
             return login;
         }
 
+
         /// <summary>
         /// 把行转化成对象
         /// </summary>
@@ -102,11 +104,10 @@ namespace personnel.DAL
         private Login DataRowToLogin(DataRow dr)
         {
             Login login = new Login();
-
-            //user.Id = Convert.ToInt32(dr[0]);
-            login.uid = Convert.ToInt32(dr["uid"]);
-            login.password = Convert.ToString(dr["password"]);
-            login.username = Convert.ToString(dr["username"]);
+            login.Uid = Convert.ToInt32(dr["uid"]);
+            login.Password = Convert.ToString(dr["password"]);
+            login.Username = Convert.ToString(dr["username"]);
+            login.Flag = Convert.ToInt32(dr["flag"]);
             return login;
         }
     }

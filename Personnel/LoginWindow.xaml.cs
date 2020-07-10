@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using personnel.BLL;
 using personnel.Model;
+using Personnel;
 
 namespace personnel
 {
@@ -30,35 +31,42 @@ namespace personnel
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //接收用户输入数据
-            string name = this.txtname.Text.Trim();
+            string name = this.txtname.Text.Trim(); //Trim去头尾空格
             string password = this.txtpassword.Password.Trim();
-            //int type = (int)this.cbType.SelectedValue;
+            //输入内容验证
             if (name == "" || password == "")
             {
-                // 用户名密码为空
                 MessageBox.Show("用户名或密码不能为空!");
                 return;
             }
-            Login login = null;
+            Login loginer = null;
             LoginBLL bll = new LoginBLL();
 
-            bool flag = bll.Login(name, password, out login);
+            int flag = bll.Login(name, password, out loginer);
 
-            if (flag)
+            switch (flag)
             {
-                //不把密码保存在内存中
-                login.password = null;
-                //登录成功记录登录者的信息
-                Common.LoginUser = login;
-                //登录成功
-                //MessageBox.Show("登录成功!");
-                new MainWindow().Show();
-                this.Close();
-            }
-            else
-            {
-                //登录失败
-                MessageBox.Show("用户名或密码错误!");
+                case -1:
+                    {
+                        MessageBox.Show("用户名或密码错误!");
+                        break;
+                    }
+                case 0:
+                    {
+                        loginer.Password = null;
+                        CommonUser.LoginUser = loginer;
+                        new UserWindow().Show();
+                        this.Close();
+                        break;
+                    }
+                case 1:
+                    {
+                        loginer.Password = null;
+                        CommonUser.LoginUser = loginer;
+                        new ManagerWindow().Show();
+                        this.Close();
+                        break;
+                    }
             }
         }
     }

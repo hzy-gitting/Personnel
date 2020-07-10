@@ -142,9 +142,9 @@ namespace personnel.DAL
 		{
 			Quit quit = new Quit();
 
-			quit.id = Convert.ToInt32(dr["id"]);
-			quit.quit_date = Convert.ToDateTime(dr["quit_date"]);
-			quit.quit_reason = Convert.ToString(dr["quit_reason"]);
+			quit.Id = Convert.ToInt32(dr["id"]);
+			quit.Quit_date = Convert.ToDateTime(dr["quit_date"]);
+			quit.Quit_reason = Convert.ToString(dr["quit_reason"]);
 			return quit;
 		}
 		private List<Quit> DataTableToList(DataTable dt)

@@ -8,14 +8,18 @@ namespace personnel.Model
 {
 	public class Login
 	{
-		public int uid { get; set; }
-		public string username { get; set; }
-		public string password { get; set; }
+		public int Uid { get; set; }
+		public string Username { get; set; }
+		public string Password { get; set; }
+		public int Flag { get; set; }  //标识位,0为员工 1为管理员
 
-		public Login(string username,string password)
+		public Login() { }
+
+		public Login(string username,string password,int flag)
 		{
-			this.username = username;
-			this.password = password;
+			this.Username = username;
+			this.Password = password;
+			this.Flag = flag;
 		}
 	}
 }

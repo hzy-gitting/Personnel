@@ -10,7 +10,7 @@
     <Grid>
         <Grid>
             <Grid.Background>
-                <ImageBrush ImageSource="images/WPF图3.jpg" />
+                <ImageBrush ImageSource="images/1.jpg" />
             </Grid.Background>
             <Grid.RowDefinitions>
             </Grid.RowDefinitions>
