@@ -21,7 +21,7 @@ namespace Personnel.DAL
         //参数列表赋值 防止SQL注入
         MySqlParameter[] p =
         {
-                new MySqlParameter("@pre_sal",MySqlDbType.VarChar),
+                new MySqlParameter("@pre_sal",MySqlDbType.Int32),
                 new MySqlParameter("@rp_id", MySqlDbType.VarChar),
                 new MySqlParameter("@rp_date", MySqlDbType.DateTime),
                 new MySqlParameter("@handler", MySqlDbType.Int32),
