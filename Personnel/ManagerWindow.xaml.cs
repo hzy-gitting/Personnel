@@ -23,5 +23,8 @@ namespace Personnel
         {
             InitializeComponent();
         }
+
+        管理员要执行的操作
+            //1.查看所有员工信息，并渲染至界面
     }
 }

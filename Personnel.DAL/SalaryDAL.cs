@@ -21,13 +21,13 @@ namespace Personnel.DAL
         //参数列表赋值 防止SQL注入
         MySqlParameter[] p =
         {
-                new MySqlParameter("@pre_sal",MySqlDbType.VarChar),
-                new MySqlParameter("@rp_id", MySqlDbType.VarChar),
+                new MySqlParameter("@pre_sal",MySqlDbType.Int32),
+                new MySqlParameter("@rp_id", MySqlDbType.Int32),
                 new MySqlParameter("@rp_date", MySqlDbType.DateTime),
-                new MySqlParameter("@handler", MySqlDbType.Int32),
-                new MySqlParameter("@cancel_date", MySqlDbType.VarChar),
-                new MySqlParameter("@cancel_reason", MySqlDbType.Int32),
-                new MySqlParameter("@current_sal", MySqlDbType.VarChar)
+                new MySqlParameter("@handler", MySqlDbType.VarChar),
+                new MySqlParameter("@cancel_date", MySqlDbType.DateTime),
+                new MySqlParameter("@cancel_reason", MySqlDbType.VarChar),
+                new MySqlParameter("@current_sal", MySqlDbType.Int32)
         };
         p[0].Value = salary.Pre_sal;
         p[1].Value = salary.Rp_id;
