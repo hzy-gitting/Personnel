@@ -19,7 +19,7 @@ using Personnel;
 namespace personnel
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// LoginWindow.xaml 的交互逻辑
     /// </summary>
     public partial class LoginWindow : Window
     {
