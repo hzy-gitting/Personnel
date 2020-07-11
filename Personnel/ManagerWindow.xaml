@@ -325,15 +325,16 @@
                 <Grid Grid.Row="0">
                     <TabItem Header="用户管理" Height="50" Width="100" Margin="0,0,0,-0.4"/>
                 </Grid>
-                <Button Content="奖罚管理" Height="50" Width="100" 
-                         Margin="14,1.8,10,3.4" Grid.Row="1" Click="OnClickRPButton"/>
-                
+                <Grid Height="55" VerticalAlignment="Top">
+                    <!--网格放拓展项目-->
+
+                </Grid>
             </Grid>
 
             <Grid Grid.Column="1">
 
                 <!--数据模板 渲染数据-->
-                <DataGrid x:Name="UserGrid" AutoGenerateColumns="False"  IsReadOnly="True" Grid.ColumnSpan="2" Margin="0,50,-0.4,0.4" Grid.RowSpan="2">
+                <DataGrid x:Name="UserGrid" AutoGenerateColumns="True"  IsReadOnly="True" Grid.ColumnSpan="2" Margin="0,50,-0.4,0.4" Grid.RowSpan="2">
                     <DataGrid.Columns>
                         <!--状态栏 选中或未被选中-->
                         <DataGridTemplateColumn  Width="30">
@@ -344,13 +345,13 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="ID" Width="120" Binding="{Binding Path=Id , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <DataGridTextColumn Header="姓名" Width="80" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn Header="民族" Width="100" Binding="{Binding Path=Folk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn Header="生日"  Width="150" Binding="{Binding Path=Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn Header="年龄" Width="80" Binding="{Binding Path=Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn Header="联系方式" Width="80" Binding="{Binding Path=Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <DataGridTextColumn Header="工种" Width="80" Binding="{Binding Path=Job, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="ID" Width="120" Binding="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridTextColumn Header="姓名" Width="80" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="民族" Width="100" Binding="{Binding Folk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="生日"  Width="150" Binding="{Binding Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="年龄" Width="80" Binding="{Binding Age, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="联系方式" Width="80" Binding="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="工种" Width="80" Binding="{Binding Job, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                         <!--操作（详情/删除)-->
                         <DataGridTemplateColumn Header="操作" Width="195">
