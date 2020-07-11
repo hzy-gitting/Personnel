@@ -278,7 +278,7 @@
             <RowDefinition Height="20*"/>
             <RowDefinition Height="140*"/>
         </Grid.RowDefinitions>
-        
+
         <!--第一行标题栏-->
         <Grid Grid.Row="0">
             <!--标题背景颜色-->
@@ -289,7 +289,7 @@
             <!--文本框-->
             <TextBlock x:Name="top_textblock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,20,0,0" FontSize="24"
                         FontWeight="Bold" FontStyle="Italic" Text="人事管理系统"/>
-             <!--扩展框-->
+            <!--扩展框-->
             <Grid>
                 <!--网格放拓展项目-->
                 <Expander x:Name="top_expander" Header="小明" HorizontalAlignment="Left" Margin="872,26,0,-70.8" VerticalAlignment="Top" Width="100" Height="116">
@@ -307,12 +307,12 @@
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="70*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Grid Grid.Column="0">
                 <Grid.Background>
                     <ImageBrush ImageSource="images/1.jpg" Stretch="UniformToFill" Opacity="0.4"/>
                 </Grid.Background>
-                
+
                 <!--分成5行-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"/>
@@ -324,6 +324,10 @@
 
                 <Grid Grid.Row="0">
                     <TabItem Header="用户管理" Height="50" Width="100" Margin="0,0,0,-0.4"/>
+                </Grid>
+                <Grid Height="55" VerticalAlignment="Top">
+                    <!--网格放拓展项目-->
+
                 </Grid>
             </Grid>
 
@@ -340,7 +344,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
+
                         <DataGridTextColumn Header="ID" Width="120" Binding="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="姓名" Width="80" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <DataGridTextColumn Header="民族" Width="100" Binding="{Binding Folk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -364,13 +368,13 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
-                
-                
-                
+
+
+
             </Grid>
 
-  
+
         </Grid>
-        
+
     </Grid>
 </Window>
