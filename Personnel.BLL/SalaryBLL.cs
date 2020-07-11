@@ -13,14 +13,14 @@ namespace Personnel.BLL
     {
         SalaryDAL salaryDAL = new SalaryDAL();
 		/// <summary>
-		/// 添加工资信息
+		/// 添加奖惩信息（id字段为自动生成，无需手动指定）
 		/// </summary>
 		/// <param name="quit_date"></param>
 		/// <param name="quit_reason"></param>
 		/// <returns>添加成功返回true， 否则返回false</returns>
 		public bool AddSalary(Salary salary)
 		{
-			return salaryDAL.Addsalary(salary) > 0;
+			return salaryDAL.AddUserSalary(salary) > 0;
 		}
 		/// <summary>
 		/// 修改工资
@@ -29,7 +29,7 @@ namespace Personnel.BLL
 		/// <returns>修改成功返回true， 否则返回false</returns>
 		public bool Modifysalary(Salary salary)
 		{
-			return salaryDAL.ModifySalary(salary) > 0;
+			return salaryDAL.ModifyUserSalary(salary) > 0;
 		}
 		/// <summary>
 		/// 根据ID获得用户奖惩信息
@@ -38,7 +38,7 @@ namespace Personnel.BLL
 		/// <returns>添加成功返回true， 否则返回false</returns>
 		public Salary GetsalaryByID(int id)
 		{
-			return salaryDAL.GetSalaryByID(id);
+			return salaryDAL.GetUserSalaryByID(id);
 		}
 		/// <summary>
 		/// 获得所有工资
