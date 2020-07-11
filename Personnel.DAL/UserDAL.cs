@@ -9,148 +9,150 @@ using System.Threading.Tasks;
 
 namespace Personnel.DAL
 {
-    public class UserDAL
-    {
-        //从工具类获取数据库连接对象
-        SqlDbHelper db= new SqlDbHelper();
-        
-        //增加一个用户 如果返回为1，说明插入成功
-        public int AddUser(User user) 
-        {
-            String sql = "insert into user values(null,@name,@folk,@birthday,@age,@phone,@work_time,@job";
-            //参数列表赋值 防止SQL注入
-            MySqlParameter[] p =
-            {
-                new MySqlParameter("@name",MySqlDbType.VarChar),
-                new MySqlParameter("@folk", MySqlDbType.VarChar),
-                new MySqlParameter("@birthday", MySqlDbType.DateTime),
-                new MySqlParameter("@age", MySqlDbType.Int32),
-                new MySqlParameter("@phone", MySqlDbType.VarChar),
-                new MySqlParameter("@work_time", MySqlDbType.Int32),
-                new MySqlParameter("@job", MySqlDbType.VarChar)
-        };
-            p[0].Value = user.Name;
-            p[1].Value = user.Folk;
-            p[2].Value = user.Birthday;
-            p[3].Value = user.Age;
-            p[4].Value = user.Phone;
-            p[5].Value = user.Work_Time;
-            p[6].Value = user.Job;
+	public class UserDAL
+	{
+		//从工具类获取数据库连接对象
+		SqlDbHelper db = new SqlDbHelper();
 
-            return db.ExecuteNonQuery(sql, p);
-        }
-        //删除一个用户,如果返回1,说明删除成功
-        public int DeletUser(int id)
-        {
-            String sql = "delete from user where id=@id";
-            MySqlParameter[] p = { new MySqlParameter("@id", MySqlDbType.Int32) };
-            return db.ExecuteNonQuery(sql, p);
-        }
+		//增加一个用户 如果返回为1，说明插入成功
+		public int AddUser(User user)
+		{
+			String sql = "insert into user values(null,@name,@folk,@birthday,@age,@phone,@work_time,@job";
+			//参数列表赋值 防止SQL注入
+			MySqlParameter[] p =
+			{
+		new MySqlParameter("@name",MySqlDbType.VarChar),
+		new MySqlParameter("@folk", MySqlDbType.VarChar),
+		new MySqlParameter("@birthday", MySqlDbType.DateTime),
+		new MySqlParameter("@age", MySqlDbType.Int32),
+		new MySqlParameter("@phone", MySqlDbType.VarChar),
+		new MySqlParameter("@work_time", MySqlDbType.Int32),
+		new MySqlParameter("@job", MySqlDbType.VarChar)
+	};
+			p[0].Value = user.Name;
+			p[1].Value = user.Folk;
+			p[2].Value = user.Birthday;
+			p[3].Value = user.Age;
+			p[4].Value = user.Phone;
+			p[5].Value = user.Work_Time;
+			p[6].Value = user.Job;
 
-        //修改一个用户 如果返回1，说明修改成功
-        public int ModifyUser(User user)
-        {
+			return db.ExecuteNonQuery(sql, p);
+		}
+		//删除一个用户,如果返回1,说明删除成功
+		public int DeletUser(int id)
+		{
+			String sql = "delete from user where id=@id";
+			MySqlParameter[] p = { new MySqlParameter("@id", MySqlDbType.Int32) };
+			return db.ExecuteNonQuery(sql, p);
+		}
 
-            String sql = "update user set name=@name,folk=@folk,birthday=@birthday,age=@age,phone=@phone,work_time=@work_time,job=@job where id=@id";
-            //参数列表赋值 防止SQL注入
-            MySqlParameter[] p =
-            {
-                new MySqlParameter("@name",MySqlDbType.VarChar),
-                new MySqlParameter("@folk", MySqlDbType.VarChar),
-                new MySqlParameter("@birthday", MySqlDbType.DateTime),
-                new MySqlParameter("@age", MySqlDbType.Int32),
-                new MySqlParameter("@phone", MySqlDbType.VarChar),
-                new MySqlParameter("@work_time", MySqlDbType.Int32),
-                new MySqlParameter("@job", MySqlDbType.VarChar),
-                new MySqlParameter("@id",MySqlDbType.Int32)
-        };
-            p[0].Value = user.Name;
-            p[1].Value = user.Folk;
-            p[2].Value = user.Birthday;
-            p[3].Value = user.Age;
-            p[4].Value = user.Phone;
-            p[5].Value = user.Work_Time;
-            p[6].Value = user.Job;
-            p[7].Value = user.Id;
-            return db.ExecuteNonQuery(sql, p);
-        }
+		//修改一个用户 如果返回1，说明修改成功
+		public int ModifyUser(User user)
+		{
 
-        //查询所有用户 （返回数组）
-        public List<User> getAllUsers()
-        {
-            String sql = "select * from user";
-            //模拟数据库表 （相当于二维数组）
-            DataTable dt = db.ExecuteDataTable(sql);
-            List<User> users = new List<User>();
-            //ORM  对象关系映射  把查询到的信息封装成对象
-            foreach (DataRow dr in dt.Rows)
-            {
-                User user = DataRowToUser(dr);
-                users.Add(user);
-            }
-            return users;
-        }
+			String sql = "update user set name=@name,folk=@folk,birthday=@birthday,age=@age,phone=@phone,work_time=@work_time,job=@job where id=@id";
+			//参数列表赋值 防止SQL注入
+			MySqlParameter[] p =
+			{
+		new MySqlParameter("@name",MySqlDbType.VarChar),
+		new MySqlParameter("@folk", MySqlDbType.VarChar),
+		new MySqlParameter("@birthday", MySqlDbType.DateTime),
+		new MySqlParameter("@age", MySqlDbType.Int32),
+		new MySqlParameter("@phone", MySqlDbType.VarChar),
+		new MySqlParameter("@work_time", MySqlDbType.Int32),
+		new MySqlParameter("@job", MySqlDbType.VarChar),
+		new MySqlParameter("@id",MySqlDbType.Int32)
+	};
+			p[0].Value = user.Name;
+			p[1].Value = user.Folk;
+			p[2].Value = user.Birthday;
+			p[3].Value = user.Age;
+			p[4].Value = user.Phone;
+			p[5].Value = user.Work_Time;
+			p[6].Value = user.Job;
+			p[7].Value = user.Id;
+			return db.ExecuteNonQuery(sql, p);
+		}
 
-        //根据ID查找用户（搜索按钮）如果返回非空，说明查找成功
-        public User GetUserByID(int id)
-        {
-            String sql = "select * from user where id=@id";
-            MySqlParameter[] p = { new MySqlParameter("@id", MySqlDbType.Int32) };
-            p[0].Value = id;
-            DataTable dt = db.ExecuteDataTable(sql,p);
-            User user = null;
-            if (dt.Rows.Count > 0)
-            {
-                DataRow dr = dt.Rows[0];
-                user = DataRowToUser(dr);
-            }
-            return user;
-        }
-        //根据姓名查找用户（搜索按钮）
-        public User GetUserByName(int name)
-        {
-            String sql = "select * from user where name=@name";
-            MySqlParameter[] p = { new MySqlParameter("@name", MySqlDbType.VarChar) };
-            p[0].Value = name;
-            DataTable dt = db.ExecuteDataTable(sql,p);
-            User user = null;
-            if (dt.Rows.Count > 0)
-            {
-                DataRow dr = dt.Rows[0];
-                user = DataRowToUser(dr);
-            }
-            return user;
-        }
-        //统计用户数量
-        public int GetUserNum()
-        {
-            String sql = "select count(*) from user";
-            DataTable dt = db.ExecuteDataTable(sql);
-            DataRow dr = dt.Rows[0];
-            int num = 0;
-            num=Convert.ToInt32(dr["count(*)"]);
-            return num;
-        }
+		//查询所有用户 （返回数组）
+		public List<User> getAllUsers()
+		{
+			String sql = "select * from user";
+			//模拟数据库表 （相当于二维数组）
+			DataTable dt = db.ExecuteDataTable(sql);
+			List<User> users = new List<User>();
+			//ORM  对象关系映射  把查询到的信息封装成对象
+			foreach (DataRow dr in dt.Rows)
+			{
+				User user = DataRowToUser(dr);
+				users.Add(user);
+			}
+			return users;
+		}
 
-        //将行中数据对应到对象属性
-        private User DataRowToUser(DataRow dr)
-        {
-            User user = new User();
-            //数据库中数据格式和实体类中格式不同
-            user.Id = Convert.ToInt32(dr["id"]);
-            if (dr["birthday"] != DBNull.Value)//判断日期非空
-            {
-                user.Birthday = Convert.ToDateTime(dr["Birthday"]);
-            }
-            user.Name = Convert.ToString(dr["name"]);
-            user.Folk = Convert.ToString(dr["folk"]);
-            user.Job = Convert.ToString(dr["job"]);
-            user.Age = Convert.ToInt32(dr["age"]);
-            user.Phone = Convert.ToString(dr["phone"]);
-            user.Work_Time = Convert.ToInt32(dr["work_time"]);
-            return user;
-        }
+		//根据ID查找用户（搜索按钮）如果返回非空，说明查找成功
+		public User GetUserByID(int id)
+		{
+			String sql = "select * from user where id=@id";
+			MySqlParameter[] p = { new MySqlParameter("@id", MySqlDbType.Int32) };
+			p[0].Value = id;
+			DataTable dt = db.ExecuteDataTable(sql, p);
+			User user = null;
+			if (dt.Rows.Count > 0)
+			{
+				DataRow dr = dt.Rows[0];
+				user = DataRowToUser(dr);
+			}
+			return user;
+		}
+		//根据姓名查找用户（搜索按钮）
+		public List<User> GetUserByName(int name)
+		{
+			String sql = "select * from user where name=@name";
+			MySqlParameter[] p = { new MySqlParameter("@name", MySqlDbType.VarChar) };
+			p[0].Value = name;
+			DataTable dt = db.ExecuteDataTable(sql, p);
+			return DataTableToList(dt);
+		}
+		//统计用户数量
+		public int GetUserNum()
+		{
+			String sql = "select count(*) from user";
+			DataTable dt = db.ExecuteDataTable(sql);
+			DataRow dr = dt.Rows[0];
+			int num = 0;
+			num = Convert.ToInt32(dr["count(*)"]);
+			return num;
+		}
 
+		//将行中数据对应到对象属性
+		private User DataRowToUser(DataRow dr)
+		{
+			User user = new User();
+			//数据库中数据格式和实体类中格式不同
+			user.Id = Convert.ToInt32(dr["id"]);
+			if (dr["birthday"] != DBNull.Value)//判断日期非空
+			{
+				user.Birthday = Convert.ToDateTime(dr["Birthday"]);
+			}
+			user.Name = Convert.ToString(dr["name"]);
+			user.Folk = Convert.ToString(dr["folk"]);
+			user.Job = Convert.ToString(dr["job"]);
+			user.Age = Convert.ToInt32(dr["age"]);
+			user.Phone = Convert.ToString(dr["phone"]);
+			user.Work_Time = Convert.ToInt32(dr["work_time"]);
+			return user;
+		}
 
-    }
+		private List<User> DataTableToList(DataTable dt)
+		{
+			List<User> users = new List<User>();
+			foreach(DataRow dr in dt.Rows)
+			{
+				users.Add(DataRowToUser(dr));
+			}
+			return users;
+		}
+	}
 }

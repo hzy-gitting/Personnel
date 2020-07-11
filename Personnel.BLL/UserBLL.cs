@@ -40,7 +40,7 @@ namespace Personnel.BLL
             return userdal.GetUserByID(id);
         }
         //根据姓名查找用户（搜索按钮）
-        public User GetUserByName(int name)
+        public List<User> GetUserByName(int name)
         {
             return userdal.GetUserByName(name);
         }
