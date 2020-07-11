@@ -112,7 +112,7 @@ namespace Personnel
                   因为这个正则表达式中有 \ ，所以要在最开始前加 @ 表示这个 \没有转移符的意思
                   使用Regex.IsMatch方法判断s的条件是否与正则表达式的条件成立
            */
-        private static bool isInteger(string s)
+        public static bool isInteger(string s)
         {
             string pattern = @"^\d*$";
             return Regex.IsMatch(s, pattern);
