@@ -83,6 +83,7 @@ namespace Personnel
 			}
 			RPBLL rpBll = new RPBLL();
 			UserGrid.ItemsSource = rpBll.GetAllRP();
+
 		}
 
 		/// <summary>

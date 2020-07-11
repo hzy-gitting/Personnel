@@ -32,7 +32,7 @@ namespace Personnel.BLL
 			return salaryDAL.ModifyUserSalary(salary) > 0;
 		}
 		/// <summary>
-		/// 根据ID获得用户奖惩信息
+		/// 根据ID获得用户工资信息
 		/// </summary>
 		/// <param name="salary"></param>
 		/// <returns>添加成功返回true， 否则返回false</returns>
@@ -47,6 +47,12 @@ namespace Personnel.BLL
 		public List<Salary> GetAllSalary()
 		{
 			return salaryDAL.getAllSalary();
+		}
+
+		//统计用户工资信息数量
+		public int GetUserSalaryNum()
+		{
+			return salaryDAL.GetUserSalaryNum();
 		}
 	}
 }
