@@ -13,7 +13,7 @@ namespace Personnel.BLL
     {
         SalaryDAL salaryDAL = new SalaryDAL();
 		/// <summary>
-		/// 添加奖惩信息（id字段为自动生成，无需手动指定）
+		/// 添加员工工资信息
 		/// </summary>
 		/// <param name="quit_date"></param>
 		/// <param name="quit_reason"></param>
