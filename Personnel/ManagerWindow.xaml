@@ -274,7 +274,7 @@
                 <TextBlock HorizontalAlignment="Left" Margin="580,26.2,0,0" Grid.Row="3" TextWrapping="Wrap" Text="/" VerticalAlignment="Top"/>
                 <TextBlock x:Name="tb_endpage" HorizontalAlignment="Left" Margin="594,27.2,0,0" Grid.Row="3" TextWrapping="Wrap" Text="2" VerticalAlignment="Top"/>
             </Grid>
-
+            
             <Grid Grid.Column="0">
                 <Grid.Background>
                     <ImageBrush ImageSource="images/1.jpg" Stretch="UniformToFill" Opacity="0.2"/>
