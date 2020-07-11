@@ -15,6 +15,7 @@ namespace personnel.DAL
 	/// 离职表DAL
 	/// 2020/7/9 17:57 
 	/// 2020/7/9 23:19 修改了错误的sql语句，和错误的参数类型
+	/// 2020/7/11 16:36 修改了AddQuit方法的签名：新增id参数，来指明是哪位员工离职
 	/// hzy
 	/// </summary>
 	public class QuitDAL
@@ -27,16 +28,18 @@ namespace personnel.DAL
 		/// <param name="quit_date"></param>
 		/// <param name="quit_reason"></param>
 		/// <returns>受影响记录条数</returns>
-		public int AddQuit(DateTime quit_date, string quit_reason)
+		public int AddQuit(int id, DateTime quit_date, string quit_reason)
 		{
-			string sql = "insert into quit (quit_date,quit_reason) " +
-				"values (@quit_date,@quit_reason)";
+			string sql = "insert into quit (id,quit_date,quit_reason) " +
+				"values (@id,@quit_date,@quit_reason)";
 			MySqlParameter[] param = {
+				new MySqlParameter("@id",MySqlDbType.Int32),
 				new MySqlParameter("@quit_date",MySqlDbType.DateTime),
 				new MySqlParameter("@quit_reason",MySqlDbType.VarChar)
 			};
-			param[0].Value = quit_date;
-			param[1].Value = quit_reason;
+			param[0].Value = id;
+			param[1].Value = quit_date;
+			param[2].Value = quit_reason;
 			return db.ExecuteNonQuery(sql, param);
 		}
 		/// <summary>

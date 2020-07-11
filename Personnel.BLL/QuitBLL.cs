@@ -11,6 +11,7 @@ namespace personnel.BLL
 	/// <summary>
 	/// 离职BLL
 	/// 2020/7/10 16：38 通过了单元测试
+	/// 2020/7/11 19:36 修改了AddQuit方法的签名：新增id参数，来指明是哪位员工离职
 	/// hzy
 	/// </summary>
 	public class QuitBLL
@@ -18,14 +19,14 @@ namespace personnel.BLL
 		QuitDAL quitDal = new QuitDAL();
 
 		/// <summary>
-		/// 添加离职信息（id字段为自动生成，无需手动指定）
+		/// 添加离职信息
 		/// </summary>
 		/// <param name="quit_date"></param>
 		/// <param name="quit_reason"></param>
 		/// <returns>添加成功返回true， 否则返回false</returns>
-		public bool AddQuit(DateTime quit_date, string quit_reason)
+		public bool AddQuit(int id,DateTime quit_date, string quit_reason)
 		{
-			return quitDal.AddQuit(quit_date, quit_reason) > 0;
+			return quitDal.AddQuit(id, quit_date, quit_reason) > 0;
 		}
 
 		/// <summary>
