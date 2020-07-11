@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="管理员界面" Height="600" Width="1000">
     <Window.Resources>
-        <Style x:Key="chkBase" TargetType="CheckBox">
+        <!--判断框样式-->
+        <Style x:Key="Checkboxstyle1" TargetType="CheckBox">
             <Setter Property="IsChecked" Value="False"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="#999"/>
@@ -15,7 +16,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="CheckBox">
                         <DockPanel  Background="{TemplateBinding Background}" ToolTip="{TemplateBinding Content}" LastChildFill="False" Width="{TemplateBinding Width}">
-                            <Image Margin="2 0 0 0" DockPanel.Dock="Left" x:Name="_img"  Stretch="None" Source="/Images/chk_null.png"/>
+                            <Image Margin="2 0 0 0" DockPanel.Dock="Left" x:Name="_img"  Stretch="None" Source="images/chk_null.png"/>
                             <TextBlock DockPanel.Dock="Left" Foreground="{TemplateBinding Foreground}" Margin="2 0 0 0" VerticalAlignment="Center" Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}" />
                         </DockPanel>
                         <ControlTemplate.Triggers>
@@ -23,183 +24,36 @@
                                 <Setter TargetName="_img" Property="Source" Value="/Images/chk_yes.png"/>
                             </Trigger>
                             <Trigger Property="IsChecked" Value="{x:Null}">
-                                <Setter TargetName="_img" Property="Source" Value="/Images/chk_null.png"/>
+                                <Setter TargetName="_img" Property="Source" Value="images/chk_null.png"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="TabControlWithUnderLineStyle" TargetType="{x:Type TabControl}">
-            <Setter Property="Padding" Value="2"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabControl}">
-                        <Grid x:Name="templateRoot" ClipToBounds="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="ColumnDefinition0"/>
-                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
-                                <RowDefinition x:Name="RowDefinition1" Height="*"/>
-                            </Grid.RowDefinitions>
-                            <TabPanel x:Name="HeaderPanel" HorizontalAlignment="Center" Background="Transparent" Grid.Column="0" IsItemsHost="True" Margin="0" Grid.Row="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
-                            <Line X1="0" X2="{Binding ActualWidth, RelativeSource={RelativeSource Self}}" Stroke="Gray" StrokeThickness="0.1" VerticalAlignment="Bottom" Margin="0 0 0 1" SnapsToDevicePixels="True"/>
-                            <Border x:Name="ContentPanel" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.Column="0" KeyboardNavigation.DirectionalNavigation="Contained" Grid.Row="1" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
-                                <ContentPresenter x:Name="PART_SelectedContentHost" ContentTemplate="{TemplateBinding SelectedContentTemplate}" Content="{TemplateBinding SelectedContent}" ContentStringFormat="{TemplateBinding SelectedContentStringFormat}" ContentSource="SelectedContent" Margin="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="TabStripPlacement" Value="Bottom">
-                                <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="1"/>
-                                <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
-                                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
-                            </Trigger>
-                            <Trigger Property="TabStripPlacement" Value="Left">
-                                <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
-                                <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
-                                <Setter Property="Grid.Column" TargetName="HeaderPanel" Value="0"/>
-                                <Setter Property="Grid.Column" TargetName="ContentPanel" Value="1"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                            </Trigger>
-                            <Trigger Property="TabStripPlacement" Value="Right">
-                                <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
-                                <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
-                                <Setter Property="Grid.Column" TargetName="HeaderPanel" Value="1"/>
-                                <Setter Property="Grid.Column" TargetName="ContentPanel" Value="0"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition0" Value="*"/>
-                                <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
-                                <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
-                                <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+        
+        <!--搜索框样式-->
+        <Style x:Key="SearchTextBoxstyle" TargetType="TextBox">
+            <Style.Triggers>
+                <!--多条件触发器-->
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsFocused" Value="false"/>
+                        <Condition Property="Text" Value=""/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <VisualBrush AlignmentX="Left" AlignmentY="Top" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <TextBlock Padding="5 2" Background="Transparent" TextWrapping="Wrap" Height="40" Foreground="Silver"><Run Text="输入用户的ID或姓名"/></TextBlock>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Setter.Value>
+                    </Setter>
+                </MultiTrigger>
+            </Style.Triggers>
         </Style>
-        <Style x:Key="TabItemExWithUnderLineStyle"  TargetType="{x:Type TabItem}">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="#FFACACAC"/>
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid x:Name="templateRoot"  SnapsToDevicePixels="True" Background="Transparent">
-                            <Border x:Name="_underline" BorderBrush="#FF2D2A93" BorderThickness="0" Margin="{TemplateBinding Margin}"/>
-                            <Grid>
-                                <TextBlock x:Name="txt" Visibility="Visible" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{TemplateBinding Header}" ToolTip="{TemplateBinding Header}" Foreground="{TemplateBinding Foreground}" TextTrimming="CharacterEllipsis" />
-                            </Grid>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Top"/>
-                                </MultiDataTrigger.Conditions>
 
-                                <Setter Property="Foreground" TargetName="txt" Value="#FF2D2A93"/>
-                            </MultiDataTrigger>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
-                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Left"/>
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Opacity" TargetName="templateRoot" Value="0.56"/>
-                            </MultiDataTrigger>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
-                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Bottom"/>
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Opacity" TargetName="templateRoot" Value="0.56"/>
-                            </MultiDataTrigger>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
-                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Right"/>
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Opacity" TargetName="templateRoot" Value="0.56"/>
-                            </MultiDataTrigger>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
-                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Top"/>
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Opacity" TargetName="templateRoot" Value="0.56"/>
-                            </MultiDataTrigger>
-
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                    <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type TabControl}}}" Value="Top"/>
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Panel.ZIndex" Value="1"/>
-                                <Setter Property="Foreground" TargetName="txt" Value="#FF2D2A93"/>
-                                <Setter Property="BorderThickness" TargetName="_underline" Value="0 0 0 2"/>
-                            </MultiDataTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="BtnInfoStyle" TargetType="Button">
-            <Setter Property="Width" Value="70"/>
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="#43a9c7"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
-                            <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#2f96b4"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#2a89a4"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <!--DataGrid样式-->
-        <Style TargetType="DataGrid">
-            <!--网格线颜色-->
-            <Setter Property="CanUserResizeColumns" Value="false"/>
-            <Setter Property="Background" Value="#FFADCEF7" />
-            <Setter Property="BorderBrush" Value="#FFF5F7F5" />
-            <Setter Property="HorizontalGridLinesBrush">
-                <Setter.Value>
-                    <SolidColorBrush Color="#d6c79b"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="VerticalGridLinesBrush">
-                <Setter.Value>
-                    <SolidColorBrush Color="#d6c79b"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
         <!--标题栏样式-->
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -229,10 +83,10 @@
             </Setter>
             <Setter Property="Height" Value="25"/>
         </Style>
+
         <!--行样式触发-->
-        <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
-        <Style  TargetType="DataGridRow">
-            <Setter Property="Background" Value="#F2F2F2" />
+        <Style TargetType="DataGridRow">
+            <!--<Setter Property="Background" Value="#F2F2F2" />-->
             <Setter Property="Height" Value="25"/>
             <Setter Property="Foreground" Value="Black" />
             <Style.Triggers>
@@ -254,6 +108,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        
         <!--单元格样式触发-->
         <Style TargetType="DataGridCell">
             <Setter Property="Template">
@@ -271,6 +126,13 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <!--拓展栏-->
+        <Style x:Key="Expander.StackPanel.Style" TargetType="FrameworkElement">
+            <Setter Property="MaxWidth" Value="80"></Setter>
+            <Setter Property="MinWidth" Value="50"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -278,7 +140,7 @@
             <RowDefinition Height="20*"/>
             <RowDefinition Height="140*"/>
         </Grid.RowDefinitions>
-        
+
         <!--第一行标题栏-->
         <Grid Grid.Row="0">
             <!--标题背景颜色-->
@@ -288,31 +150,30 @@
 
             <!--文本框-->
             <TextBlock x:Name="top_textblock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,20,0,0" FontSize="24"
-                        FontWeight="Bold" FontStyle="Italic" Text="人事管理系统"/>
-             <!--扩展框-->
+                        FontWeight="Bold" FontStyle="Normal" Text="人事管理系统"/>
+            <!--扩展框-->
             <Grid>
-                <!--网格放拓展项目-->
-                <Expander x:Name="top_expander" Header="小明" HorizontalAlignment="Left" Margin="872,26,0,-70.8" VerticalAlignment="Top" Width="100" Height="116">
-                    <Grid>
-                        <Button x:Name="top_button1" Content="修改密码" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="top_button1_Click"/>
-                        <Button x:Name="top_button2" Content="注销" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="75" Click="top_button2_Click"/>
-                    </Grid>
+                <!--下拉项放具体业务-->
+                <Expander x:Name="expander" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="902,32,0,-21.8" >
+                    <StackPanel>
+                        <Button x:Name="button4"  Content="修改密码"  Width="80"/>
+                        <Button x:Name="button5"  Content="注销"  Width="80"/>
+                    </StackPanel>
                 </Expander>
             </Grid>
         </Grid>
 
-        <!--侧边栏-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="70*"/>
             </Grid.ColumnDefinitions>
-            
+
+            <!--侧边栏-->
             <Grid Grid.Column="0">
                 <Grid.Background>
                     <ImageBrush ImageSource="images/1.jpg" Stretch="UniformToFill" Opacity="0.4"/>
                 </Grid.Background>
-                
                 <!--分成5行-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"/>
@@ -323,25 +184,62 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <TabItem Header="用户管理" Height="50" Width="100" Margin="0,0,0,-0.4"/>
+                    <Button Content="用户管理" FontStyle="Oblique"  FontStretch="Expanded" FontSize="15" Margin="0,3,0,0.2"/>
                 </Grid>
             </Grid>
 
+            <!--用户展示模块-->
             <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="8*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" RenderTransformOrigin="0.439,0.438">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="135*"/>
+                        <ColumnDefinition Width="734*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,720.6,-0.2">
+                        <TextBlock Text="当前所处的页面为:" FontSize="15" VerticalAlignment="Center" Margin="10,9,9,8.8" Height="19"/>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="0.8,0,-0.4,-0.2">
+                        <!--这里考虑Content实现动态绑定？待实现  -->
+                        <Label x:Name="pagename" Content="{Binding pagename}"  VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" FontWeight="Light" Foreground="DarkBlue"/>
+                    </Grid>
+                    <Border Margin="0,0,0,-0.2" BorderBrush="DarkBlue" BorderThickness="0 0 0 1" Grid.ColumnSpan="2"/>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="46*"/>
+                        <ColumnDefinition Width="389*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txt_search" Style="{StaticResource SearchTextBoxstyle}" HorizontalAlignment="Left" Height="22" Margin="22,10,0,0" TextWrapping="Wrap" Visibility="Visible" VerticalAlignment="Top" Width="170" Grid.ColumnSpan="2"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="129.2,11,0,0" VerticalAlignment="Top" Width="158" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="1">
+                        <TextBlock Text="按用户ID"/>
+                        <TextBlock Text="按用户名"/>
+                    </ComboBox>
+                    <Button Content="搜索" HorizontalAlignment="Left" Margin="305.2,12,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+                    <Button Content="新增" HorizontalAlignment="Left" Margin="576.2,12,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+
+                </Grid>
 
                 <!--数据模板 渲染数据-->
-                <DataGrid x:Name="UserGrid" AutoGenerateColumns="True"  IsReadOnly="True" Grid.ColumnSpan="2" Margin="0,50,-0.4,0.4" Grid.RowSpan="2">
+                <DataGrid x:Name="UserGrid" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="2">
                     <DataGrid.Columns>
                         <!--状态栏 选中或未被选中-->
                         <DataGridTemplateColumn  Width="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox   Style="{StaticResource chkBase}" Name="CheckBoxUser"  Tag="{Binding ID}"/>
+                                    <CheckBox  Style="{StaticResource Checkboxstyle1}" Name="CheckBoxUser"  Tag="{Binding ID}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
-                        <DataGridTextColumn Header="ID" Width="120" Binding="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <DataGridTextColumn Header="ID" Width="40" Binding="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <DataGridTextColumn Header="姓名" Width="80" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <DataGridTextColumn Header="民族" Width="100" Binding="{Binding Folk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <DataGridTextColumn Header="生日"  Width="150" Binding="{Binding Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -354,23 +252,63 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Tag="{Binding ID}" Content="详情" Style="{StaticResource BtnInfoStyle}" Width="50" />
-                                        <Button Tag="{Binding ID}" Content="删除" Style="{StaticResource BtnInfoStyle}" Width="50" />
-                                        <Button Content="修改" Style="{StaticResource BtnInfoStyle}"   Width="50"  />
+                                        <Button Tag="{Binding ID}" Content="详情"  Width="50" />
+                                        <Button Tag="{Binding ID}" Content="删除"  Width="50" />
+                                        <Button Content="修改"   Width="50"  />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-
-                
-                
-                
+                <Button Content="批量删除" HorizontalAlignment="Left" Margin="763,12.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.353,-0.271"/>
+                <TextBlock HorizontalAlignment="Left" Margin="21,21.2,0,0" Grid.Row="3" TextWrapping="Wrap" Text="共有数据" VerticalAlignment="Top" Height="20" Width="64" FontWeight="Light" FontSize="13" />
+                <Label x:Name="sumlabel" Content="Label" HorizontalAlignment="Left" Margin="81,19.2,0,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="0.285,0.508" />
+                <TextBlock HorizontalAlignment="Left" Margin="126,23.2,0,0" Grid.Row="3" TextWrapping="Wrap" Text="条" VerticalAlignment="Top" RenderTransformOrigin="0.633,0.079" Height="20" Width="17" FontWeight="Light" FontSize="13"/>
+                <Button Content="上一页" Click="return_button"  HorizontalAlignment="Left" Margin="464,21.2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.045,0.302"/>
+                <Button Content="下一页" Click="proceed_button" HorizontalAlignment="Left" Margin="643,21.2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75" />
+                <TextBox x:Name="tb_jumpage" HorizontalAlignment="Left" Height="15" Margin="740,26.2,0,0" Grid.Row="3"  VerticalAlignment="Top" Width="28" RenderTransformOrigin="-0.414,0.24"/>
+                <Button Content="跳转" Click="jump_button" HorizontalAlignment="Left" Margin="785,22.2,0,0" Grid.Row="3" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.579,1.219"/>
+                <TextBlock HorizontalAlignment="Left" Margin="572,37.2,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Light"/>
+                <TextBlock x:Name="tb_currentpage" HorizontalAlignment="Left" Margin="562,27.2,0,0" Grid.Row="3" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Foreground="Red"/>
+                <TextBlock HorizontalAlignment="Left" Margin="580,26.2,0,0" Grid.Row="3" TextWrapping="Wrap" Text="/" VerticalAlignment="Top"/>
+                <TextBlock x:Name="tb_endpage" HorizontalAlignment="Left" Margin="594,27.2,0,0" Grid.Row="3" TextWrapping="Wrap" Text="2" VerticalAlignment="Top"/>
             </Grid>
 
-  
+            <Grid Grid.Column="0">
+                <Grid.Background>
+                    <ImageBrush ImageSource="images/1.jpg" Stretch="UniformToFill" Opacity="0.2"/>
+                </Grid.Background>
+
+                <!--分成5行-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Button Content="用户管理" FontStyle="Oblique"  FontStretch="Expanded" FontSize="15" Margin="0,3,0,0.2"/>
+                </Grid>
+                <Border Margin="0 0 0 0" BorderBrush="Beige" BorderThickness="0 0 0 1"/>
+                <Grid Grid.Row="1">
+                    <Button Content="奖惩管理" FontStyle="Oblique"  FontStretch="Expanded" FontSize="15" Margin="0,0,0,3.2"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Button Content="工资管理" FontStyle="Oblique"  FontStretch="Expanded" FontSize="15" Margin="0,0,0,3.2"/>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Button Content="离职管理" FontStyle="Oblique"  FontStretch="Expanded" FontSize="15" Margin="0,0,0,3.2"/>
+                </Grid>
+                <Grid Grid.Row="4">
+                    <Button Content="报表管理" FontStyle="Oblique"  FontStretch="Expanded" FontSize="15" Margin="0,0,0,3.2"/>
+                </Grid>
+            </Grid>
+            
         </Grid>
-        
+
     </Grid>
 </Window>

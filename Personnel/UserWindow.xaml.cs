@@ -19,9 +19,13 @@ namespace Personnel
     /// </summary>
     public partial class UserWindow : Window
     {
+        //运行时配置
         public UserWindow()
         {
             InitializeComponent();
+
+
+
         }
 
 
