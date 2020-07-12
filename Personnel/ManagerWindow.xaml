@@ -218,11 +218,12 @@
                         <ColumnDefinition Width="389*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox x:Name="txt_search" Style="{StaticResource SearchTextBoxstyle}" HorizontalAlignment="Left" Height="22" Margin="22,10,0,0" TextWrapping="Wrap" Visibility="Visible" VerticalAlignment="Top" Width="170" Grid.ColumnSpan="2"/>
-                    <ComboBox HorizontalAlignment="Left" Margin="129.2,11,0,0" VerticalAlignment="Top" Width="158" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="1">
-                        <TextBlock Text="按用户ID"/>
-                        <TextBlock Text="按用户名"/>
+                    <ComboBox x:Name="combox_search"  HorizontalAlignment="Left" Margin="129.2,11,0,0" VerticalAlignment="Top" Width="158" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="1">
+                        <ComboBoxItem x:Name="bt_searchtype0"  Content="---- 请选择 ----" IsEnabled="False" HorizontalContentAlignment="center"/>
+                        <ComboBoxItem x:Name="bt_searchtype1"  Content="按用户ID查询" HorizontalContentAlignment="center"/>
+                        <ComboBoxItem x:Name="bt_searchtype2" Content="按用户姓名查询" HorizontalContentAlignment="center"/>
                     </ComboBox>
-                    <Button Content="搜索" HorizontalAlignment="Left" Margin="305.2,12,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+                    <Button Click="search_button" Content="搜索" HorizontalAlignment="Left" Margin="305.2,12,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
                     <Button Content="新增" HorizontalAlignment="Left" Margin="576.2,12,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
 
                 </Grid>
@@ -234,7 +235,7 @@
                         <DataGridTemplateColumn  Width="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox  Style="{StaticResource Checkboxstyle1}" Name="CheckBoxUser"  Tag="{Binding ID}"/>
+                                    <CheckBox  Style="{StaticResource Checkboxstyle1}" Name="cb_choose"  Tag="{Binding Id}" Click="cb_choose"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -252,16 +253,17 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Tag="{Binding ID}" Content="详情"  Width="50" />
-                                        <Button Tag="{Binding ID}" Content="删除"  Width="50" />
-                                        <Button Content="修改"   Width="50"  />
+                                        <!--这三个按钮和具体的用户绑定-->
+                                        <Button x:Name="bt_detail" Tag="{Binding Id}" Content="详情"  Width="50" />
+                                        <Button x:Name="bt_deleteone" Tag="{Binding Id}" Content="删除"  Width="50" Click="bt_deleteonerecord" />
+                                        <Button x:Name="bt_modify" Content="修改" Width="50"  />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Content="批量删除" HorizontalAlignment="Left" Margin="763,12.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.353,-0.271"/>
+                <Button Content="批量删除" HorizontalAlignment="Left" Margin="763,12.2,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" RenderTransformOrigin="1.353,-0.271" Click="bt_deletemany"/>
                 <TextBlock HorizontalAlignment="Left" Margin="21,21.2,0,0" Grid.Row="3" TextWrapping="Wrap" Text="共有数据" VerticalAlignment="Top" Height="20" Width="64" FontWeight="Light" FontSize="13" />
                 <Label x:Name="sumlabel" Content="Label" HorizontalAlignment="Left" Margin="81,19.2,0,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="0.285,0.508" />
                 <TextBlock HorizontalAlignment="Left" Margin="126,23.2,0,0" Grid.Row="3" TextWrapping="Wrap" Text="条" VerticalAlignment="Top" RenderTransformOrigin="0.633,0.079" Height="20" Width="17" FontWeight="Light" FontSize="13"/>

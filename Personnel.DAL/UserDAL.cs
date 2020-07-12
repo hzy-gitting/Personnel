@@ -44,6 +44,7 @@ namespace Personnel.DAL
 		{
 			String sql = "delete from user where id=@id";
 			MySqlParameter[] p = { new MySqlParameter("@id", MySqlDbType.Int32) };
+			p[0].Value = id;
 			return db.ExecuteNonQuery(sql, p);
 		}
 
@@ -107,7 +108,7 @@ namespace Personnel.DAL
 			return user;
 		}
 		//根据姓名查找用户（搜索按钮）
-		public List<User> GetUserByName(int name)
+		public List<User> GetUserByName(string name)
 		{
 			String sql = "select * from user where name=@name";
 			MySqlParameter[] p = { new MySqlParameter("@name", MySqlDbType.VarChar) };
@@ -115,6 +116,7 @@ namespace Personnel.DAL
 			DataTable dt = db.ExecuteDataTable(sql, p);
 			return DataTableToList(dt);
 		}
+
 		//统计用户数量
 		public int GetUserNum()
 		{

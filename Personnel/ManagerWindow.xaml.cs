@@ -25,6 +25,7 @@ namespace Personnel
     public partial class ManagerWindow : Window
     {
         const int maxnum = 12;
+        UserBLL userBLL = new UserBLL();
         public ManagerWindow()
         {
             InitializeComponent();
@@ -38,7 +39,6 @@ namespace Personnel
         //实现分页，maxnum是每页最大记录数,假定为12条记录 currentPage表示当前所在页数
         private void ManagerBinding(int maxnum,int currentpage)//管理员显示用户管理页面
         {
-            UserBLL userBLL = new UserBLL();
             // number表示每个页面显示的记录数 currentSize表示当前显示页数
             List<User> userList = userBLL.getAllUsers();
             int sum = userList.Count;//sum是记录总数
@@ -175,20 +175,102 @@ namespace Personnel
         }
 
 
-        //2020-07-11 20:12 剩余功能如下：
-        //查看用户详细信息
-        //修改用户信息
-        //增加一个用户
-        //删除用户记录
-        //根据条件查找用户
-
-
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+         
+        }
 
+        //条件查询
+        private void search_button(object sender, RoutedEventArgs e)
+        {
+
+            if (txt_search.Text != "" && (combox_search.SelectedItem).ToString() != "")
+            {
+                UserBLL userBLL = new UserBLL();
+                List<User> users = new List<User>();
+                User user = null;
+                //按员工ID查询 索引从0开始 但是第0项是空字符串
+                if (combox_search.SelectedIndex == 1)
+                {
+                    int id = int.Parse(txt_search.Text);
+                    user = userBLL.GetUserByID(id);
+                    if (user != null)
+                    {
+                        users.Add(user);
+                        UserGrid.ItemsSource = users;
+                    }
+                }
+                else
+                {
+                    string name = txt_search.Text;
+                    users = userBLL.GetUserByName(name);
+                    if (users != null)
+                    {
+                        UserGrid.ItemsSource = users;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("查找方式和内容不能为空!");
+            }
+        }
+
+        //删除一个用户记录
+        private void bt_deleteonerecord(object sender, RoutedEventArgs e)
+        {
+            //获取当前行的对象
+            User user=(User)UserGrid.SelectedItem;
+            int Id = user.Id;
+            if (MessageBox.Show("是否删除该用户的信息？", "Tips", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                userBLL.DeletUser(Id);
+            }
+            ManagerBinding(maxnum, 1);      
+        }
+
+
+        List<int> selectedID = new List<int>();  //保存选中要进行批量删除的用户ID
+
+        private void cb_choose(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            int ID =(int)(cb.Tag);
+            if (cb.IsChecked == true)
+            {
+                selectedID.Add(ID);        
+            }
+            else
+            {
+                selectedID.Remove(ID);  
+            }
+        }
+
+        //批量删除用户记录
+        private void bt_deletemany(object sender, RoutedEventArgs e)
+        {
+
+            if (selectedID.Count != 0)
+            {
+                if (MessageBox.Show("是否删除所选中的员工信息?", "Tips", MessageBoxButton.YesNo) == MessageBoxResult.OK)
+                {
+
+                    foreach (int i in selectedID)
+                    {
+                        userBLL.DeletUser(i); //循环遍历删除里面的记录
+                    }
+                }
+                else
+                {
+                    selectedID.Clear();
+                }
+                ManagerBinding(maxnum, 1);     //刷新页面
+            }
+            else
+                MessageBox.Show("请选择要删除的用户");
         }
 
        
+
     }
 }
