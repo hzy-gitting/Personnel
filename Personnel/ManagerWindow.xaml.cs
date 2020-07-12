@@ -1,4 +1,5 @@
 ﻿using personnel.BLL;
+using personnel.Model;
 using Personnel.BLL;
 using Personnel.DAL;
 using Personnel.Model;
@@ -17,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace Personnel
 {
     /// <summary>
@@ -24,6 +26,7 @@ namespace Personnel
     /// </summary>
     public partial class ManagerWindow : Window
     {
+        static int stateflag = 0;
         const int maxnum = 12;
         UserBLL userBLL = new UserBLL();
         public ManagerWindow()
@@ -31,18 +34,18 @@ namespace Personnel
             InitializeComponent();
             this.WindowStartupLocation = WindowStartupLocation;
             this.ResizeMode = ResizeMode.CanMinimize;
-            ManagerBinding(maxnum,1);
+            ManagerBinding(maxnum, 1);
             pagename.Content = "用户管理";
         }
 
 
         //实现分页，maxnum是每页最大记录数,假定为12条记录 currentPage表示当前所在页数
-        private void ManagerBinding(int maxnum,int currentpage)//管理员显示用户管理页面
+        private void ManagerBinding(int maxnum, int currentpage)//管理员显示用户管理页面
         {
             // number表示每个页面显示的记录数 currentSize表示当前显示页数
             List<User> userList = userBLL.getAllUsers();
             int sum = userList.Count;//sum是记录总数
-            sumlabel.Content=sum; //把记录数显示到标签上
+            sumlabel.Content = sum; //把记录数显示到标签上
             int pagesize = 0;
             if (sum % maxnum == 0)//刚好可以填满
             {
@@ -50,10 +53,10 @@ namespace Personnel
             }
             else
             {
-                pagesize = (sum / maxnum )+ 1;
+                pagesize = (sum / maxnum) + 1;
             }
             tb_currentpage.Text = currentpage.ToString(); //显示当前页
-            tb_endpage.Text=pagesize.ToString(); //显示总页数
+            tb_endpage.Text = pagesize.ToString(); //显示总页数
             UserGrid.ItemsSource = userList.Skip((currentpage - 1) * maxnum).Take(maxnum).ToList();
         }
 
@@ -61,9 +64,9 @@ namespace Personnel
         private void return_button(object sender, RoutedEventArgs e)
         {
             int currentpage = int.Parse(tb_currentpage.Text);
-           if (currentpage > 1)
+            if (currentpage > 1)
             {
-               ManagerBinding(maxnum, currentpage - 1);
+                ManagerBinding(maxnum, currentpage - 1);
             }
         }
 
@@ -81,10 +84,10 @@ namespace Personnel
         private void proceed_button(object sender, RoutedEventArgs e)
         {
             int endpage = int.Parse(tb_endpage.Text); //获取最大页数
-            int currentpage=int.Parse(tb_currentpage.Text);
-            if (currentpage <endpage)
+            int currentpage = int.Parse(tb_currentpage.Text);
+            if (currentpage < endpage)
             {
-                 ManagerBinding(maxnum, currentpage + 1);
+                ManagerBinding(maxnum, currentpage + 1);
             }
         }
 
@@ -122,7 +125,7 @@ namespace Personnel
         //跳转按钮
         private void jump_button(object sender, RoutedEventArgs e)
         {
-            if (isInteger(tb_jumpage.Text) && (tb_jumpage.Text)!=null)
+            if (isInteger(tb_jumpage.Text) && (tb_jumpage.Text) != null)
             {
                 int jumpage = int.Parse(tb_jumpage.Text);
                 int endpage = int.Parse(tb_endpage.Text);
@@ -137,7 +140,8 @@ namespace Personnel
                 }
                 //清空格子中的数,防止保留在页面上影响下次操作
 
-            }else
+            }
+            else
             {
                 MessageBox.Show("请输入有效数字!");
             }
@@ -145,21 +149,22 @@ namespace Personnel
         }
 
         //动态生成页面
-		private void OnClickRPButton(object sender, RoutedEventArgs e)
+        private void OnClickRPButton(object sender, RoutedEventArgs e)
         {
-            RemoveFieldColumns();
-            DataGridTextColumn dgtxtCol;
-            string[] fields = { "奖罚编号", "奖罚名称", "奖金/罚金" ,
-                "Rp_id","Rp_name","Sal"};
-            for (int i = 0; i < 3; i++)
-            {
-                dgtxtCol = new DataGridTextColumn();
-                dgtxtCol.Header = fields[i];
-                dgtxtCol.Binding = new Binding(fields[i + 3]);
-                UserGrid.Columns.Insert(1 + i, dgtxtCol);
-            }
-            RPBLL rpBll = new RPBLL();
-            UserGrid.ItemsSource = rpBll.GetAllRP();
+            //stateflag = 2;
+            //RemoveFieldColumns();
+            //DataGridTextColumn dgtxtCol;
+            //string[] fields = { "奖罚编号", "奖罚名称", "奖金/罚金" ,
+            //    "Rp_id","Rp_name","Sal"};
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    dgtxtCol = new DataGridTextColumn();
+            //    dgtxtCol.Header = fields[i];
+            //    dgtxtCol.Binding = new Binding(fields[i + 3]);
+            //    UserGrid.Columns.Insert(1 + i, dgtxtCol);
+            //}
+            //RPBLL rpBll = new RPBLL();
+            //UserGrid.ItemsSource = rpBll.GetAllRP();
 
         }
 
@@ -177,56 +182,142 @@ namespace Personnel
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-         
+
         }
 
-        //条件查询
+        ///条件查询
         private void search_button(object sender, RoutedEventArgs e)
         {
+            switch (stateflag)
+            {
+                case 1:
+                    {
+                        if (txt_search.Text != "" && (combox_search.SelectedItem).ToString() != "")
+                        {
+                            UserBLL userBLL = new UserBLL();
+                            List<User> users = new List<User>();
+                            User user = null;
+                            //按员工ID查询 索引从0开始 但是第0项是空字符串
+                            if (combox_search.SelectedIndex == 1)
+                            {
+                                int id = int.Parse(txt_search.Text);
+                                user = userBLL.GetUserByID(id);
+                                if (user != null)
+                                {
+                                    users.Add(user);
+                                    UserGrid.ItemsSource = users;
+                                }
+                            }
+                            else
+                            {
+                                string name = txt_search.Text;
+                                users = userBLL.GetUserByName(name);
+                                if (users != null)
+                                {
+                                    UserGrid.ItemsSource = users;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("查找方式和内容不能为空!");
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        if (txt_search.Text != "" && (combox_search.SelectedItem).ToString() != "")
+                        {
+                            RPBLL rpBLL = new RPBLL();
+                            List<RP> rps = new List<RP>();
+                            //按员工ID查询 索引从0开始 但是第0项是空字符串
+                            if (combox_search.SelectedIndex == 1)
+                            {
+                                int id = int.Parse(txt_search.Text);
+                                rps = rpBLL.GetRPsByUserId(id);
+                                if (rps != null)
+                                {
+                                    UserGrid.ItemsSource = rps;
+                                }
+                            }
+                            else
+                            {
+                                string name = txt_search.Text;
+                                rps = rpBLL.GetRPByRPName(name);
+                                if (rps != null)
+                                {
+                                    UserGrid.ItemsSource = rps;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("查找方式和内容不能为空!");
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        if (txt_search.Text != "" && (combox_search.SelectedItem).ToString() != "")
+                        {
+                            SalaryBLL salaryBLL = new SalaryBLL();
+                            List<Salary> salarys = new List<Salary>();
+                            Salary salary = null;
+                            if (combox_search.SelectedIndex == 1)
+                            {
+                                int id = int.Parse(txt_search.Text);
+                                salary = salaryBLL.GetsalaryByID(id);
+                                if (salary != null)
+                                {
+                                    salarys.Add(salary);
+                                    UserGrid.ItemsSource = salarys;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("查找方式和内容不能为空!");
+                        }
+                        break;
+                    }
+                default: break;
+            }
 
-            if (txt_search.Text != "" && (combox_search.SelectedItem).ToString() != "")
-            {
-                UserBLL userBLL = new UserBLL();
-                List<User> users = new List<User>();
-                User user = null;
-                //按员工ID查询 索引从0开始 但是第0项是空字符串
-                if (combox_search.SelectedIndex == 1)
-                {
-                    int id = int.Parse(txt_search.Text);
-                    user = userBLL.GetUserByID(id);
-                    if (user != null)
-                    {
-                        users.Add(user);
-                        UserGrid.ItemsSource = users;
-                    }
-                }
-                else
-                {
-                    string name = txt_search.Text;
-                    users = userBLL.GetUserByName(name);
-                    if (users != null)
-                    {
-                        UserGrid.ItemsSource = users;
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("查找方式和内容不能为空!");
-            }
         }
 
         //删除一个用户记录
         private void bt_deleteonerecord(object sender, RoutedEventArgs e)
         {
-            //获取当前行的对象
-            User user=(User)UserGrid.SelectedItem;
-            int Id = user.Id;
-            if (MessageBox.Show("是否删除该用户的信息？", "Tips", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            switch (stateflag)
             {
-                userBLL.DeletUser(Id);
+                case 1:
+                    {
+                        //获取当前行的对象
+                        User user = (User)UserGrid.SelectedItem;
+                        int Id = user.Id;
+                        if (MessageBox.Show("是否删除该用户的信息？", "Tips", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
+                            userBLL.DeletUser(Id);
+                        }
+                        ManagerBinding(maxnum, 1);
+                        break;
+                    }
+                case 2:
+                    { break; }
+                case 3:
+                    {
+                        Salary salary = (Salary)UserGrid.SelectedItem;
+                        int Id = salary.Id;
+                        if (MessageBox.Show("是否删除该用户的信息？", "Tips", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
+                            SalaryBLL salaryBLL = new SalaryBLL();
+                            salaryBLL.DeletSalary(Id);
+                        }
+                        ManagerBinding(maxnum, 1);
+                        break;
+                    }
+                default: break;
             }
-            ManagerBinding(maxnum, 1);      
         }
 
 
@@ -235,42 +326,193 @@ namespace Personnel
         private void cb_choose(object sender, RoutedEventArgs e)
         {
             CheckBox cb = sender as CheckBox;
-            int ID =(int)(cb.Tag);
+            int ID = (int)(cb.Tag);
             if (cb.IsChecked == true)
             {
-                selectedID.Add(ID);        
+                selectedID.Add(ID);
             }
             else
             {
-                selectedID.Remove(ID);  
+                selectedID.Remove(ID);
             }
         }
 
         //批量删除用户记录
         private void bt_deletemany(object sender, RoutedEventArgs e)
         {
-
-            if (selectedID.Count != 0)
+            switch (stateflag)
             {
-                if (MessageBox.Show("是否删除所选中的员工信息?", "Tips", MessageBoxButton.YesNo) == MessageBoxResult.OK)
-                {
-
-                    foreach (int i in selectedID)
+                case 1:
                     {
-                        userBLL.DeletUser(i); //循环遍历删除里面的记录
+                        if (selectedID.Count != 0)
+                        {
+                            if (MessageBox.Show("是否删除所选中的员工信息?", "Tips", MessageBoxButton.YesNo) == MessageBoxResult.OK)
+                            {
+
+                                foreach (int i in selectedID)
+                                {
+                                    userBLL.DeletUser(i); //循环遍历删除里面的记录
+                                }
+                            }
+                            else
+                            {
+                                selectedID.Clear();
+                            }
+                            ManagerBinding(maxnum, 1);     //刷新页面
+                        }
+                        else
+                            MessageBox.Show("请选择要删除的用户");
+                        break;
                     }
-                }
-                else
-                {
-                    selectedID.Clear();
-                }
-                ManagerBinding(maxnum, 1);     //刷新页面
+                case 2:
+                    { break; }
+                case 3:
+                    {
+                        if (selectedID.Count != 0)
+                        {
+                            if (MessageBox.Show("是否删除所选中的员工信息?", "Tips", MessageBoxButton.YesNo) == MessageBoxResult.OK)
+                            {
+
+                                foreach (int i in selectedID)
+                                {
+                                    SalaryBLL salaryBLL = new SalaryBLL();
+                                    salaryBLL.DeletSalary(i); //循环遍历删除里面的记录
+                                }
+                            }
+                            else
+                            {
+                                selectedID.Clear();
+                            }
+                            ManagerBinding(maxnum, 1);     //刷新页面
+                        }
+                        else
+                            MessageBox.Show("请选择要删除的用户");
+                        break;
+                    }
+                default: break;
+
             }
-            else
-                MessageBox.Show("请选择要删除的用户");
+        }
+        /// <summary>
+        /// 工资管理模块
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SalaryButton_Click(object sender, RoutedEventArgs e)
+        {
+            stateflag = 3;
+            RemoveFieldColumns();
+            DataGridTextColumn dgtxtCol;
+            string[] fields = { "id", "基本工资", "最终工资" ,
+                "Id","Pre_sal","Current_sal"};
+            for (int i = 0; i < 3; i++)
+            {
+                dgtxtCol = new DataGridTextColumn();
+                dgtxtCol.Header = fields[i];
+                dgtxtCol.Binding = new Binding(fields[i + 3]);
+                UserGrid.Columns.Insert(1 + i, dgtxtCol);
+            }
+
+            List<Salary> salarys = new List<Salary>();
+            Salary salary = new Salary();
+            SalaryBLL salaryBLL = new SalaryBLL();
+            List<Salary> salary1 = salaryBLL.GetAllSalary();
+            int id = 0;
+            foreach (Salary item in salary1)
+            {
+                id = item.Id;
+                salary = salaryBLL.GetsalaryByID(id);
+                RP rP = new RP();
+                RPBLL rpBll = new RPBLL();
+                List<RP> rps = rpBll.GetRPsByUserId(id);
+                int sum = 0;
+                if (rps != null)
+                {
+                    foreach (RP item1 in rps)
+                    {
+                        sum += item1.Sal;
+                    }
+                    salary.Current_sal = salary.Pre_sal + sum;
+                    salaryBLL.Modifysalary(salary);
+                }
+                Salary salary2 = new Salary();
+                salary2 = salaryBLL.GetsalaryByID(id);
+                if (salary2 != null)
+                {
+                    salarys.Add(salary2);
+                }
+            }
+            UserGrid.ItemsSource = salarys;
+        }
+        /// <summary>
+        /// 奖惩管理模块
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RPButton_Click(object sender, RoutedEventArgs e)
+        {
+            stateflag = 2;
+            RemoveFieldColumns();
+            DataGridTextColumn dgtxtCol;
+            string[] fields = { "奖惩编号", "用户id", "奖罚名称","奖罚金","处理时间" ,
+                "No","User_id","Rp_name","Sal","Rp_time"};
+            for (int i = 0; i < fields.Length / 2; i++)
+            {
+                dgtxtCol = new DataGridTextColumn();
+                dgtxtCol.Header = fields[i];
+                dgtxtCol.Binding = new Binding(fields[i + fields.Length / 2]);
+                UserGrid.Columns.Insert(1 + i, dgtxtCol);
+            }
+            RP rP = new RP();
+            RPBLL rpBll = new RPBLL();
+            List<RP> m = new List<RP>();
+            m = rpBll.GetAllRP();
+            UserGrid.ItemsSource = m;
         }
 
-       
+        private void ADDButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (stateflag)
+            {
+                case 1:
+                    {
+                        break;
+                    }
+                case 2:
+                    {
+                        break;
+                    }
+                case 3:
+                    {
+                        new AddSalary().Show();
+                        this.Close();
+                        break;
+                    }
+                default: break;
+            }
+        }
 
+        private void bt_modify_Click(object sender, RoutedEventArgs e)
+        {
+            switch (stateflag)
+            {
+                case 1:
+                    { break; }
+                case 2:
+                    { break; }
+                case 3:
+                    {
+                        Salary salary = (Salary)UserGrid.SelectedItem;
+                        int Id = salary.Id;
+                        new ModifySalary().Show();
+                        this.Close();
+                        SalaryBLL salaryBLL = new SalaryBLL();
+                        salaryBLL.DeletSalary(Id);
+                        ManagerBinding(maxnum, 1);
+                        break;
+                    }
+                default: break;
+            }
+        }
     }
 }

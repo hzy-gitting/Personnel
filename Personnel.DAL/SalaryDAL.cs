@@ -18,7 +18,7 @@ namespace Personnel.DAL
 		//增加一个用户工资信息 如果返回为1，说明插入成功
 		public int AddUserSalary(Salary salary)
 		{
-			String sql = "insert into user (id,pre_sal,current_sal) " +
+			String sql = "insert into salary (id,pre_sal,current_sal) " +
 				" values(@id,@pre_sal,@current_sal)";
 			//参数列表赋值 防止SQL注入
 			MySqlParameter[] p =
@@ -33,7 +33,7 @@ namespace Personnel.DAL
 
 			return db.ExecuteNonQuery(sql, p);
 		}
-		//删除一个用户,如果返回1,说明删除成功
+		//删除一个用户工资信息,如果返回1,说明删除成功
 		public int DeletUserSalary(int id)
 		{
 			String sql = "delete from salary where id=@id";
@@ -41,10 +41,10 @@ namespace Personnel.DAL
 			return db.ExecuteNonQuery(sql, p);
 		}
 
-		//修改一个用户 如果返回1，说明修改成功
+		//修改一个用户工资 如果返回1，说明修改成功
 		public int ModifyUserSalary(Salary salary)
 		{
-			String sql = "update user set pre_sal=@pre_sal ," +
+			String sql = "update salary set pre_sal=@pre_sal ," +
 				"current_sal=@current_sal where id=@id";
 			//参数列表赋值 防止SQL注入
 			MySqlParameter[] p ={
@@ -88,6 +88,18 @@ namespace Personnel.DAL
 				salary = DataRowToSalary(dr);
 			}
 			return salary;
+		}
+		/// <summary>
+		/// 删除一个员工工资信息
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public int DeletSalary(int Id)
+		{
+			String sql = "delete from salary where id=@id";
+			MySqlParameter[] p = { new MySqlParameter("@id", MySqlDbType.Int32) };
+			p[0].Value = Id;
+			return db.ExecuteNonQuery(sql, p);
 		}
 
 

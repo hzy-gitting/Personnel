@@ -49,7 +49,9 @@ namespace Personnel
 			userBll.AddUser(newUser);
 
 		}
-
+		/// <summary>
+		/// 验证合法性
+		/// </summary>
 		private void CheckValid()
 		{
 			//所有文本框

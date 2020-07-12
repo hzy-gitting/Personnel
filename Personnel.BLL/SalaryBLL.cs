@@ -54,5 +54,10 @@ namespace Personnel.BLL
 		{
 			return salaryDAL.GetUserSalaryNum();
 		}
+		//删除一个用户工资信息,如果返回1,说明删除成功
+		public int DeletSalary(int id)
+		{
+			return salaryDAL.DeletSalary(id);
+		}
 	}
 }
