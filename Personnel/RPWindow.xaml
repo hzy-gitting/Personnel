@@ -1,0 +1,21 @@
+﻿<Window x:Class="Personnel.RPWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Personnel"
+        mc:Ignorable="d"
+        Title="奖罚记录" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="dgRP" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Height="420" VerticalAlignment="Top" 
+                  Width="794" Margin="0,0,-0.4,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="奖惩编号" Binding="{Binding Path=No }"  Width="auto"/>
+                <DataGridTextColumn Header="奖罚名称" Binding="{Binding Path=Rp_name }"></DataGridTextColumn>
+                <DataGridTextColumn Header="奖金/罚金" Binding="{Binding Path=Sal }" Width="auto"/>
+                <DataGridTextColumn Header="奖罚对象id" Binding="{Binding Path=User_id }" Width="auto"/>
+                <DataGridTextColumn Header="奖罚日期" Binding="{Binding Path=Rp_time }" Width="auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

@@ -148,6 +148,7 @@ namespace Personnel
 		//点击奖罚管理按钮，动态改变dataGrid控件的列
 		private void OnClickRPButton(object sender, RoutedEventArgs e)
 		{
+			pagename.Content = "奖罚管理";
 			RemoveFieldColumns();
 			DataGridTextColumn dgtxtCol;
 			string[] fields = { "奖罚编号", "奖罚名称", "奖金/罚金" ,

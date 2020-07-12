@@ -44,7 +44,7 @@ namespace Personnel.DAL
 		//修改一个用户 如果返回1，说明修改成功
 		public int ModifyUserSalary(Salary salary)
 		{
-			String sql = "update user set pre_sal=@pre_sal ," +
+			String sql = "update salary set pre_sal=@pre_sal ," +
 				"current_sal=@current_sal where id=@id";
 			//参数列表赋值 防止SQL注入
 			MySqlParameter[] p ={

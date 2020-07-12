@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using personnel.BLL;
 using personnel.Model;
 using Personnel;
+using Personnel.BLL;
 
 namespace personnel
 {
@@ -23,9 +24,12 @@ namespace personnel
 	/// </summary>
 	public partial class LoginWindow : Window
 	{
+		SalaryBLL salaryBLL = new SalaryBLL();
 		public LoginWindow()
 		{
 			InitializeComponent();
+			//刚进入系统时计算好当前所有员工的最终工资
+			salaryBLL.CalcAllUserCurrentSalaryAndUpdateDB();
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
