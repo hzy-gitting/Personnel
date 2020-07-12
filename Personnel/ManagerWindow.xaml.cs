@@ -35,6 +35,13 @@ namespace Personnel
             pagename.Content = "用户管理";
         }
 
+        //便于修改用户
+        private User GetUserMessage()
+        {
+            User user = (User)(UserGrid.SelectedItem);
+            return user;
+        }
+
 
         //实现分页，maxnum是每页最大记录数,假定为12条记录 currentPage表示当前所在页数
         private void ManagerBinding(int maxnum,int currentpage)//管理员显示用户管理页面
@@ -100,7 +107,6 @@ namespace Personnel
         }
 
         /*函数isInteger(string s)获取用户输入的值
-           1.判断合法性
            正则表达式判断输入是否为整数
                \d 匹配数字（0-9 数字）
                例子：判断输入的字符串是否符合\d这个正则表达式
@@ -111,7 +117,8 @@ namespace Personnel
                       $表示以\d结尾，因为$会搜索最近的元字符来使用，所以不用再输入一次\d
                   因为这个正则表达式中有 \ ，所以要在最开始前加 @ 表示这个 \没有转移符的意思
                   使用Regex.IsMatch方法判断s的条件是否与正则表达式的条件成立
-           */
+        */
+
         public static bool isInteger(string s)
         {
             string pattern = @"^\d*$";
@@ -122,7 +129,7 @@ namespace Personnel
         //跳转按钮
         private void jump_button(object sender, RoutedEventArgs e)
         {
-            if (isInteger(tb_jumpage.Text) && (tb_jumpage.Text)!=null)
+            if (isInteger(tb_jumpage.Text) && (tb_jumpage.Text)!="")
             {
                 int jumpage = int.Parse(tb_jumpage.Text);
                 int endpage = int.Parse(tb_endpage.Text);
@@ -144,35 +151,33 @@ namespace Personnel
             tb_jumpage.Text = "";
         }
 
-        //动态生成页面
-		private void OnClickRPButton(object sender, RoutedEventArgs e)
+        //添加用户信息
+        private void add_button(object sender, RoutedEventArgs e)
         {
-            RemoveFieldColumns();
-            DataGridTextColumn dgtxtCol;
-            string[] fields = { "奖罚编号", "奖罚名称", "奖金/罚金" ,
-                "Rp_id","Rp_name","Sal"};
-            for (int i = 0; i < 3; i++)
-            {
-                dgtxtCol = new DataGridTextColumn();
-                dgtxtCol.Header = fields[i];
-                dgtxtCol.Binding = new Binding(fields[i + 3]);
-                UserGrid.Columns.Insert(1 + i, dgtxtCol);
-            }
-            RPBLL rpBll = new RPBLL();
-            UserGrid.ItemsSource = rpBll.GetAllRP();
-
+           WindowAddUser add = new WindowAddUser();
+            add.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            //添加用户界面悬浮在当前页面上
+            add.Owner = this;
+            add.ShowDialog();
+            //重新刷新界面
+            ManagerBinding(maxnum, 1);
         }
 
-        /// 删除字段列
-        private void RemoveFieldColumns()
+        //修改用户信息
+        private void modify_button(object sender, RoutedEventArgs e)
         {
-            int count = UserGrid.Columns.Count();
-            //除第一列（checkbox）和最后一列（操作列）外，全部删除
-            for (int i = 1; i < count - 1; i++)
-            {
-                UserGrid.Columns.RemoveAt(1);
-            }
+            //问题:怎么将当前窗口的数据传给修改用户界面？ 通过构造函数传入？
+            User user = (User)UserGrid.SelectedItem;
+            ModifyUser modi = new ModifyUser(user);
+            modi.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            //修改用户界面悬浮在当前页面上
+            modi.Owner = this;
+            modi.ShowDialog();
+            //重新刷新界面
+            ManagerBinding(maxnum, 1);
         }
+
+        
 
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -270,7 +275,34 @@ namespace Personnel
                 MessageBox.Show("请选择要删除的用户");
         }
 
-       
+        //动态生成页面
+        private void OnClickRPButton(object sender, RoutedEventArgs e)
+        {
+            RemoveFieldColumns();
+            DataGridTextColumn dgtxtCol;
+            string[] fields = { "奖罚编号", "奖罚名称", "奖金/罚金" ,
+                "Rp_id","Rp_name","Sal"};
+            for (int i = 0; i < 3; i++)
+            {
+                dgtxtCol = new DataGridTextColumn();
+                dgtxtCol.Header = fields[i];
+                dgtxtCol.Binding = new Binding(fields[i + 3]);
+                UserGrid.Columns.Insert(1 + i, dgtxtCol);
+            }
+            RPBLL rpBll = new RPBLL();
+            UserGrid.ItemsSource = rpBll.GetAllRP();
+        }
+
+        /// 删除字段列
+        private void RemoveFieldColumns()
+        {
+            int count = UserGrid.Columns.Count();
+            //除第一列（checkbox）和最后一列（操作列）外，全部删除
+            for (int i = 1; i < count - 1; i++)
+            {
+                UserGrid.Columns.RemoveAt(1);
+            }
+        }
 
     }
 }

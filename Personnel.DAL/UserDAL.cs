@@ -17,7 +17,7 @@ namespace Personnel.DAL
 		//增加一个用户 如果返回为1，说明插入成功
 		public int AddUser(User user)
 		{
-			String sql = "insert into user values(null,@name,@folk,@birthday,@age,@phone,@work_time,@job";
+			String sql = "insert into user values(0,@name,@folk,@birthday,@age,@phone,@work_time,@job)";
 			//参数列表赋值 防止SQL注入
 			MySqlParameter[] p =
 			{
@@ -39,6 +39,7 @@ namespace Personnel.DAL
 
 			return db.ExecuteNonQuery(sql, p);
 		}
+
 		//删除一个用户,如果返回1,说明删除成功
 		public int DeletUser(int id)
 		{

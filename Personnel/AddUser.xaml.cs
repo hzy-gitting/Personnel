@@ -30,43 +30,44 @@ namespace Personnel
 		//点击添加按钮
 		private void BtnAdd_Click(object sender, RoutedEventArgs e)
 		{
-			try
-			{
-				CheckValid();
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message,"添加用户时出错");
-			}
-			User newUser = new User();
-			newUser.Age = Convert.ToInt32(txtBoxAge.Text);
-			newUser.Folk = txtBoxFolk.Text;
-			newUser.Job = txtBoxJob.Text;
-			newUser.Name = txtBoxName.Text;
-			newUser.Phone = txtBoxPhone.Text;
-			newUser.Work_Time = Convert.ToInt32(txtBoxWorkTime.Text);
-			newUser.Birthday = dpBirthday.DisplayDate;
-			userBll.AddUser(newUser);
-
+				try
+				{
+					CheckValid();
+					User newUser = new User();
+					newUser.Age = Convert.ToInt32(txtBox_Age.Text);
+					newUser.Folk = txtBox_Folk.Text;
+					newUser.Job = combox_addjob.Text;
+					newUser.Name = txtBox_Name.Text;
+					newUser.Phone = txtBox_Phone.Text;
+					newUser.Work_Time = Convert.ToInt32(txtBox_WorkTime.Text);
+					newUser.Birthday = dp_Birthday.DisplayDate;
+					userBll.AddUser(newUser);
+					MessageBox.Show("添加成功!");
+					this.Close();
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "添加用户时出错");
+				}
 		}
 
 		private void CheckValid()
 		{
 			//所有文本框
 			TextBox[] textBoxes = {
-				txtBoxAge , txtBoxFolk , txtBoxJob ,
-				txtBoxName,txtBoxPhone,txtBoxWorkTime
+				txtBox_Age , txtBox_Folk,
+				txtBox_Name,txtBox_Phone,txtBox_WorkTime
 			};
 			foreach(TextBox tb in textBoxes)
 			{
-				if (tb.Text == "")
+				if (tb.Text == ""|| combox_addjob.Text=="")
 				{
-					throw new Exception("信息填写不能为空");
+					throw new Exception("请填写完整信息!");
 				}
 			}
 			//只能输入数字的文本框
 			TextBox[] textBoxes_Num = {
-				txtBoxAge ,txtBoxPhone,txtBoxWorkTime
+				txtBox_Age ,txtBox_Phone,txtBox_WorkTime
 			};
 			foreach (TextBox tb in textBoxes_Num)
 			{
@@ -75,7 +76,6 @@ namespace Personnel
 					throw new Exception("检测到非法输入，请输入数字");
 				}
 			}
-			
 		}
 
 		//点击取消按钮，关闭窗口
