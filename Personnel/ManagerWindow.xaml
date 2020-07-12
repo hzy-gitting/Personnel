@@ -297,7 +297,8 @@
                 </Grid>
                 <Border Margin="0 0 0 0" BorderBrush="Beige" BorderThickness="0 0 0 1"/>
                 <Grid Grid.Row="1">
-                    <Button Content="奖惩管理" FontStyle="Oblique"  FontStretch="Expanded" FontSize="15" Margin="0,0,0,3.2"/>
+                    <Button Content="奖惩管理" FontStyle="Oblique"  FontStretch="Expanded" 
+                            FontSize="15" Margin="0,0,0,3.2" Click="OnClickRPButton"/>
                 </Grid>
                 <Grid Grid.Row="2">
                     <Button Content="工资管理" FontStyle="Oblique"  FontStretch="Expanded" FontSize="15" Margin="0,0,0,3.2"/>

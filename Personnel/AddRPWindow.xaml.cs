@@ -1,5 +1,4 @@
-﻿using Personnel.BLL;
-using Personnel.Model;
+﻿using personnel.BLL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,53 +16,47 @@ using System.Windows.Shapes;
 namespace Personnel
 {
 	/// <summary>
-	/// Window1.xaml 的交互逻辑
+	/// AddRPWindow.xaml 的交互逻辑
+	/// 2020/7/12 10:40 
+	/// hzy
 	/// </summary>
-	public partial class WindowAddUser : Window
+	public partial class AddRPWindow : Window
 	{
-		UserBLL userBll = new UserBLL();
-		public WindowAddUser()
+		RPBLL rpBll = new RPBLL();
+
+		public AddRPWindow()
 		{
 			InitializeComponent();
 		}
 
-		//点击添加按钮
 		private void BtnAdd_Click(object sender, RoutedEventArgs e)
 		{
 			try
 			{
 				CheckValid();
 
-				User newUser = new User();
-				newUser.Age = Convert.ToInt32(txtBoxAge.Text);
-				newUser.Folk = txtBoxFolk.Text;
-				newUser.Job = txtBoxJob.Text;
-				newUser.Name = txtBoxName.Text;
-				newUser.Phone = txtBoxPhone.Text;
-				newUser.Work_Time = Convert.ToInt32(txtBoxWorkTime.Text);
-				newUser.Birthday = dpBirthday.DisplayDate;
-				if( userBll.AddUser(newUser) > 0)
+				if (rpBll.AddRP(txtBoxRPName.Text, Convert.ToInt32(txtBoxSal),
+					Convert.ToInt32(txtBoxUserId), dpRPTime.DisplayDate))
 				{
 					this.Close();
 				}
 				else
 				{
-					throw new Exception("添加员工失败");
+					throw new Exception("添加奖惩记录失败");
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "添加用户时出错");
-
+				MessageBox.Show(ex.Message, "添加奖惩记录出错",
+					MessageBoxButton.OK, MessageBoxImage.Error);
 			}
+			
 		}
-
 		private void CheckValid()
 		{
 			//所有文本框
 			TextBox[] textBoxes = {
-				txtBoxAge , txtBoxFolk , txtBoxJob ,
-				txtBoxName,txtBoxPhone,txtBoxWorkTime
+				txtBoxRPName , txtBoxSal , txtBoxUserId ,
 			};
 			foreach (TextBox tb in textBoxes)
 			{
@@ -74,7 +67,7 @@ namespace Personnel
 			}
 			//只能输入数字的文本框
 			TextBox[] textBoxes_Num = {
-				txtBoxAge ,txtBoxPhone,txtBoxWorkTime
+				txtBoxSal ,txtBoxUserId,
 			};
 			foreach (TextBox tb in textBoxes_Num)
 			{
@@ -83,10 +76,7 @@ namespace Personnel
 					throw new Exception("检测到非法输入，请输入数字");
 				}
 			}
-
 		}
-
-		//点击取消按钮，关闭窗口
 		private void BtnCancel_Click(object sender, RoutedEventArgs e)
 		{
 			this.Close();
