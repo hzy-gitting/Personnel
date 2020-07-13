@@ -71,7 +71,7 @@ namespace personnel
 						CommonUser.LoginUser = loginer;
 						new ManagerWindow().Show();
 						this.Close();
-						break;
+						break; 
 					}
 			}
 		}
