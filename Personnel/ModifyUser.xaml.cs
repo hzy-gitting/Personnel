@@ -63,7 +63,7 @@ namespace Personnel
                 newUser.Work_Time = Convert.ToInt32(txtBox_WorkTime.Text);
                 newUser.Birthday = dp_Birthday.DisplayDate;
                 userBll.ModifyUser(newUser);
-                MessageBox.Show("修改成功!");
+                //MessageBox.Show("修改成功!");
                 this.Close();
             }
             catch (Exception ex)

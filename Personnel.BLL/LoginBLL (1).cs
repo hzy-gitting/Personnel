@@ -22,9 +22,17 @@ namespace personnel.BLL
             return loginer.Flag;  //标志位复用
         }
 
-		public object GetLoginByuserName(string name)
-		{
-			throw new NotImplementedException();
-		}
-	}
+
+        public Login GetLoginByuserName(string Name)
+        {
+            Login login = new Login();
+            login = logindal.GetLoginByuserName(Name);
+            return login;
+        }
+
+        public int UpdateLogin(Login loginer)
+        {
+            return logindal.UpdateLogin(loginer);
+        }
+    }
 }

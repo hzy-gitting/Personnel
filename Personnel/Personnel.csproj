@@ -66,11 +66,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddRPWindow.xaml.cs">
+      <DependentUpon>AddRPWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddRPWindow2.xaml.cs" />
     <Compile Include="AddSalary.xaml.cs">
       <DependentUpon>AddSalary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ManagerWindowRP.cs" />
+    <Compile Include="ManagerWindowSalary.cs" />
+    <Compile Include="ManagerWindowUser.xaml.cs" />
+    <Compile Include="ModifyPassword.xaml.cs">
+      <DependentUpon>ModifyPassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ModifySalary.xaml.cs">
       <DependentUpon>ModifySalary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModifyUser.xaml.cs">
+      <DependentUpon>ModifyUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RPWindow.xaml.cs">
+      <DependentUpon>RPWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateRPWindow.xaml.cs">
+      <DependentUpon>UpdateRPWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
@@ -78,6 +97,10 @@
     <Compile Include="AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddRPWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="AddSalary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,7 +124,23 @@
     <Compile Include="ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="ModifyPassword.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ModifySalary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModifyUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RPWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UpdateRPWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

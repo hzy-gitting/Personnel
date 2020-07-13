@@ -215,16 +215,17 @@
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="46*"/>
-                        <ColumnDefinition Width="389*"/>
+                        <ColumnDefinition Width="254*"/>
+                        <ColumnDefinition Width="135*"/>
                     </Grid.ColumnDefinitions>
                     <TextBox x:Name="txt_search" Style="{StaticResource SearchTextBoxstyle}" HorizontalAlignment="Left" Height="22" Margin="22,10,0,0" TextWrapping="Wrap" Visibility="Visible" VerticalAlignment="Top" Width="170" Grid.ColumnSpan="2"/>
-                    <ComboBox x:Name="combox_search"  HorizontalAlignment="Left" Margin="129.2,11,0,0" VerticalAlignment="Top" Width="158" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="1">
+                    <ComboBox x:Name="combox_search"  HorizontalAlignment="Left" Margin="129,11,0,0" VerticalAlignment="Top" Width="158" Grid.Column="1">
                         <ComboBoxItem x:Name="bt_searchtype0"  Content="---- 请选择 ----" IsEnabled="False" HorizontalContentAlignment="center"/>
                         <ComboBoxItem x:Name="bt_searchtype1"  Content="按用户ID查询" HorizontalContentAlignment="center"/>
                         <ComboBoxItem x:Name="bt_searchtype2" Content="按用户姓名查询" HorizontalContentAlignment="center"/>
                     </ComboBox>
                     <Button Click="search_button" Content="搜索" HorizontalAlignment="Left" Margin="305,12,0,5.8" Width="75" Grid.Column="1"/>
-                    <Button Content="新增" HorizontalAlignment="Left" Margin="576,12,0,5.8" Width="75" Grid.Column="1" Click="ADDButton_Click"/>
+                    <Button Content="新增" HorizontalAlignment="Left" Margin="68.3,12,0,5.8" Width="75" Grid.Column="2" Click="ADDButton_Click"/>
 
                 </Grid>
 
@@ -235,7 +236,7 @@
                         <DataGridTemplateColumn  Width="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox  Style="{StaticResource Checkboxstyle1}" Name="cb_choose"  Tag="{Binding Id}" Click="cb_choose"/>
+                                    <CheckBox  Style="{StaticResource Checkboxstyle1}" x:Name="chkBox"  Tag="{Binding Id}" Click="cb_choose"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -293,7 +294,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <Button Content="用户管理" FontStyle="Oblique"  FontStretch="Expanded" FontSize="15" Margin="0,3,0,0.2"/>
+                    <Button Content="用户管理" FontStyle="Oblique"  FontStretch="Expanded" FontSize="15" Margin="0,3,0,0.2" Click="OnClickUserManageButton"/>
                 </Grid>
                 <Border Margin="0 0 0 0" BorderBrush="Beige" BorderThickness="0 0 0 1"/>
                 <Grid Grid.Row="1">

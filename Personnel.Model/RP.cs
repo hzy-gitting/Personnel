@@ -21,6 +21,14 @@ namespace personnel.Model
 		public int User_id { get; set; }
 
 		public DateTime Rp_time { get; set; }
+
+		public int Id
+		{
+			get
+			{
+				return No;
+			}
+		}
 		public RP() { }
 
 		public RP(int no, string rp_name, int sal, int User_id, DateTime Rp_time)

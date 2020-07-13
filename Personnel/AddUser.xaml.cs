@@ -42,7 +42,6 @@ namespace Personnel
 					newUser.Work_Time = Convert.ToInt32(txtBox_WorkTime.Text);
 					newUser.Birthday = dp_Birthday.DisplayDate;
 					userBll.AddUser(newUser);
-					MessageBox.Show("添加成功!");
 					this.Close();
 				}
 				catch (Exception ex)

@@ -17,16 +17,24 @@ using Personnel.Model;
 
 namespace Personnel
 {
-    /// <summary>
-    /// ModifySalary.xaml 的交互逻辑
-    /// </summary>
-    public partial class ModifySalary : Window
-    {
-        SalaryBLL salaryBLL = new SalaryBLL();
-        public ModifySalary()
-        {
-            InitializeComponent();
-        }
+	/// <summary>
+	/// ModifySalary.xaml 的交互逻辑
+	/// </summary>
+	public partial class ModifySalary : Window
+	{
+		SalaryBLL salaryBLL = new SalaryBLL();
+		public ModifySalary(Salary salary)
+		{
+			InitializeComponent();
+			InitData(salary);
+		}
+		private void InitData(Salary salary)
+		{
+			txtBoxModifyId.Text = Convert.ToString(salary.Id);
+			txtBoxModifyPre_sal.Text = Convert.ToString(salary.Pre_sal);
+			txtBoxModifyCurrent_sal.Text = Convert.ToString(salary.Current_sal);
+		}
+
 		/// <summary>
 		/// 点击添加按钮
 		/// </summary>
@@ -41,21 +49,22 @@ namespace Personnel
 				newsalary.Id = Convert.ToInt32(txtBoxModifyId.Text);
 				newsalary.Pre_sal = Convert.ToInt32(txtBoxModifyPre_sal.Text);
 				newsalary.Current_sal = Convert.ToInt32(txtBoxModifyCurrent_sal.Text);
-				salaryBLL.AddSalary(newsalary);
+				salaryBLL.Modifysalary(newsalary);
+				MessageBox.Show("修改成功!");
+				this.Close();
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message, "添加用户时出错");
 			}
-			new ManagerWindow().Show();
 			this.Close();
 		}
 		private void CheckValid()
 		{
 			//所有文本框
 			TextBox[] textBoxes = {
-				txtBoxModifyId , txtBoxModifyPre_sal , txtBoxModifyCurrent_sal
-			};
+		txtBoxModifyId , txtBoxModifyPre_sal , txtBoxModifyCurrent_sal
+	    };
 			foreach (TextBox tb in textBoxes)
 			{
 				if (tb.Text == "")
@@ -65,8 +74,8 @@ namespace Personnel
 			}
 			//只能输入数字的文本框
 			TextBox[] textBoxes_Num = {
-				txtBoxModifyId , txtBoxModifyPre_sal , txtBoxModifyCurrent_sal
-			};
+		txtBoxModifyId , txtBoxModifyPre_sal , txtBoxModifyCurrent_sal
+	    };
 			foreach (TextBox tb in textBoxes_Num)
 			{
 				if (!ManagerWindow.isInteger(tb.Text))
@@ -79,8 +88,8 @@ namespace Personnel
 		///点击取消按钮，关闭窗口
 		private void BtnModifyCancel_Click(object sender, RoutedEventArgs e)
 		{
-			new ManagerWindow().Show();
 			this.Close();
 		}
+
 	}
 }

@@ -47,7 +47,6 @@ namespace Personnel
 			{
 				MessageBox.Show(ex.Message, "添加用户时出错");
 			}
-			new ManagerWindow().Show();
 			this.Close();
 		}
 		private void CheckValid()
@@ -79,7 +78,6 @@ namespace Personnel
 		///点击取消按钮，关闭窗口
 		private void BtnCancel_Click(object sender, RoutedEventArgs e)
 		{
-			new ManagerWindow().Show();
 			this.Close();
 		}
 	}
