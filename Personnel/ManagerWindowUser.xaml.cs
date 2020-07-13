@@ -144,7 +144,6 @@ namespace Personnel
 				else
 				{
 					MessageBox.Show("跳转页数不在查询范围内!");
-					return;
 				}
 				//清空格子中的数,防止保留在页面上影响下次操作
 
@@ -246,6 +245,7 @@ namespace Personnel
 					if (!isInteger(txt_search.Text))
 					{
 						MessageBox.Show("请输入数字");
+						txt_search.Text = "";
 						return;
 					}
 					int id = int.Parse(txt_search.Text);
@@ -273,19 +273,6 @@ namespace Personnel
 			}
 		}
 
-		//管理员修改用户名 密码
-		private void modify_password_user()
-		{
-			ModifyPassword modifpassword = new ModifyPassword(loginer);
-			modifpassword.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-			modifpassword.Owner = this;
-			modifpassword.ShowDialog();
-		}
-
-		//注销，返回登录界面
-		private void user_exit_user()
-		{
-			new LoginWindow().Show();
-		}
+		
 	}
 }

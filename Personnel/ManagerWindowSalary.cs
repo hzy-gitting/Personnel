@@ -105,7 +105,6 @@ namespace Personnel
 				else
 				{
 					MessageBox.Show("跳转页数不在查询范围内!");
-					return;
 				}
 				//清空格子中的数,防止保留在页面上影响下次操作
 
@@ -136,6 +135,7 @@ namespace Personnel
 					if (!isInteger(txt_search.Text))
 					{
 						MessageBox.Show("请输入数字");
+						txt_search.Text = "";
 						return;
 					}
 					int id = int.Parse(txt_search.Text);
@@ -148,13 +148,12 @@ namespace Personnel
 				}
 				sum = salaryList.Count;
 				SalaryBinding(maxnum, 1);
-				txt_search.Text = "";
-
 			}
 			else
 			{
 				MessageBox.Show("查找方式和内容不能为空!");
 			}
+			txt_search.Text = "";
 		}
 		/// <summary>
 		/// 删除一个用户记录
@@ -186,6 +185,10 @@ namespace Personnel
 						SalaryBLL salaryBLL = new SalaryBLL();
 						salaryBLL.DeletSalary(i); //循环遍历删除里面的记录
 					}
+				}
+				else
+				{
+					selectedID.Clear();
 				}
 				salaryList = SalaryBLL.GetAllSalary();
 				SalaryBinding(maxnum, 1);     //刷新页面

@@ -156,8 +156,8 @@
                 <!--下拉项放具体业务-->
                 <Expander x:Name="expander" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="902,32,0,-21.8" >
                     <StackPanel>
-                        <Button x:Name="btnModifyPwd"  Content="修改密码"  Width="80" Click="BtnModifyPwd_Click"/>
-                        <Button x:Name="btnUnregister"  Content="注销"  Width="80" Click="BtnUnregister_Click"/>
+                        <Button x:Name="button4"  Content="修改密码"  Width="80" Click="modify_password"/>
+                        <Button x:Name="button5"  Content="注销"  Width="80" Click="user_exit"/>
                     </StackPanel>
                 </Expander>
             </Grid>

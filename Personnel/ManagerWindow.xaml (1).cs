@@ -1,4 +1,5 @@
-﻿using personnel.BLL;
+﻿using personnel;
+using personnel.BLL;
 using personnel.Model;
 using Personnel.BLL;
 using Personnel.DAL;
@@ -204,15 +205,24 @@ namespace Personnel
 				default: break;
 			}
 		}
+
+
 		//管理员修改用户名 密码
-		private void BtnModifyPwd_Click(object sender, RoutedEventArgs e)
+		private void modify_password(object sender, RoutedEventArgs e)
 		{
-			modify_password_user();
+			ModifyPassword modifpassword = new ModifyPassword();
+			modifpassword.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+			modifpassword.Owner = this;
+			modifpassword.ShowDialog();
 		}
+
 		//注销，返回登录界面
-		private void BtnUnregister_Click(object sender, RoutedEventArgs e)
+		private void user_exit(object sender, RoutedEventArgs e)
 		{
-			user_exit_user();
+			LoginWindow backlogin = new LoginWindow();
+			backlogin.Show();
+			backlogin.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+			this.Close();
 		}
 	}
 }

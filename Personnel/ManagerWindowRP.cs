@@ -73,13 +73,11 @@ namespace Personnel
 				{
 					foreach (int i in selectedID)
 					{
-						if (!rpBll.DeleteRPByNo(i))
-						{
-							MessageBox.Show(
-								"删除No为" + i + "的奖罚记录失败");
-						}
+						rpBll.DeleteRPByNo(i);
 					}
+					
 				}
+				selectedID.Clear();
 				m_rps = rpBll.GetAllRP();
 				ManagerBindingRP(rpBll.GetAllRP(), maxnum, 1);
 			}
@@ -132,6 +130,7 @@ namespace Personnel
 					if (!isInteger(txt_search.Text))
 					{
 						MessageBox.Show("请输入数字");
+						txt_search.Text = "";
 						return;
 					}
 					int id = int.Parse(txt_search.Text);
@@ -145,12 +144,13 @@ namespace Personnel
 				UserGrid.ItemsSource = rps;
 				m_rps = rps;
 				ManagerBindingRP(rps, maxnum, 1);
-				txt_search.Text = "";
+				
 			}
 			else
 			{
 				MessageBox.Show("查找方式和内容不能为空!");
 			}
+			txt_search.Text = "";
 		}
 
 		//实现分页，maxnum是每页最大记录数,假定为12条记录 currentPage表示当前所在页数
@@ -238,7 +238,6 @@ namespace Personnel
 				else
 				{
 					MessageBox.Show("跳转页数不在查询范围内!");
-					return;
 				}
 			}
 			else

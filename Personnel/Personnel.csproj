@@ -69,16 +69,14 @@
     <Compile Include="AddRPWindow.xaml.cs">
       <DependentUpon>AddRPWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddRPWindow2.xaml.cs" />
     <Compile Include="AddSalary.xaml.cs">
       <DependentUpon>AddSalary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ManagerWindow.xaml %281%29.cs" />
     <Compile Include="ManagerWindowRP.cs" />
     <Compile Include="ManagerWindowSalary.cs" />
     <Compile Include="ManagerWindowUser.xaml.cs" />
-    <Compile Include="ModifyPassword.xaml.cs">
-      <DependentUpon>ModifyPassword.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ModifyPassword.xaml %281%29.cs" />
     <Compile Include="ModifySalary.xaml.cs">
       <DependentUpon>ModifySalary.xaml</DependentUpon>
     </Compile>
@@ -109,10 +107,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ManagerWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -121,10 +115,11 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ManagerWindow.xaml.cs">
-      <DependentUpon>ManagerWindow.xaml</DependentUpon>
-    </Compile>
-    <Page Include="ModifyPassword.xaml">
+    <Page Include="ManagerWindow%281%29.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ModifyPassword %281%29.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

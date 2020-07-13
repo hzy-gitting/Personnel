@@ -14,7 +14,7 @@
             </Grid.Background>
             <Grid.RowDefinitions>
             </Grid.RowDefinitions>
-            <Border CornerRadius="10" Margin="200,100" BorderThickness="2"  BorderBrush="White" Opacity="0.8">
+            <Border CornerRadius="10" Margin="200,100" BorderThickness="2"  Background="White" BorderBrush="White" Opacity="0.8">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" Color="White" BlurRadius="8"/>
                 </Border.Effect>
@@ -24,30 +24,24 @@
                         <RowDefinition Height="110*"/>
                         <RowDefinition Height="50*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="用户登录" HorizontalAlignment="Left" Margin="60,10,0,110" Grid.Row="0" Width="103" FontSize="24" Grid.RowSpan="2" Foreground="#FFFCFAFA" FontWeight="Bold"/>
-                    <TextBlock Text="USER LOGIN" HorizontalAlignment="Left" Margin="160,25,0,110" Grid.Row="0" Width="103" FontSize="12" Grid.RowSpan="2" Foreground="#FFFCFAFA" FontWeight="Bold"/>
+                    <TextBlock Text="用户登录" HorizontalAlignment="Left" Margin="60,10,0,110"
+                               Grid.Row="0" Width="103" FontSize="24" Grid.RowSpan="2"
+                               Foreground="#FF252020" FontWeight="Bold"/>
+                    <TextBlock Text="USER LOGIN" HorizontalAlignment="Left" Margin="160,25,0,110"
+                               Grid.Row="0" Width="103" FontSize="12" Grid.RowSpan="2
+                               " Foreground="#FF252020" FontWeight="Bold"/>
                     <TextBlock Text="用户名:" HorizontalAlignment="Left" Margin="32,19,0,59.6" Grid.Row="1" Foreground="#FF252020" Width="52" FontSize="14"/>
                     <TextBox Name="txtname" Grid.Row="1" Margin="110,12,30.4,60">
                     </TextBox>
                     <TextBlock Text="密  码 :" HorizontalAlignment="Left" Margin="32,69,0,9.6" Grid.Row="1" Width="58" Foreground="#FF252020" FontSize="14"/>
                     <PasswordBox Name="txtpassword" Grid.Row="1" Margin="110,63,30.4,12">
                     </PasswordBox>
-                    <Button Content="登录" Margin="80.4,10.4,210,9.8" RenderTransformOrigin="0.902,0.468" Background="#FFF3FC32" Grid.Row="2" Click="Button_Click">
+                    <Button Content="登录" Margin="32,10,30.6,10" RenderTransformOrigin="0.902,0.468"
+                            Background="Black" Grid.Row="2" Click="Button_Click">
                         <Button.Template >
                             <ControlTemplate TargetType="{x:Type Button}" >
-                                <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="1" CornerRadius="8">
-                                    <Border.Background>#FFF3FC32</Border.Background>
-                                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                    <Button Content="取消" Margin="210,10.4,80.4,9.8" RenderTransformOrigin="0.902,0.468" Background="#FF1ABDFA" Grid.Row="2">
-                        <Button.Template >
-                            <ControlTemplate TargetType="{x:Type Button}" >
-                                <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="1" CornerRadius="8">
-                                    <Border.Background>#FF1ABDFA</Border.Background>
-                                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="8" Background="#FF1598E8">
+                                    <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Border>
                             </ControlTemplate>
                         </Button.Template>
